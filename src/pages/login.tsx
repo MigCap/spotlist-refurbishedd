@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { getProviders, signIn } from 'next-auth/react';
 
 // import NextImage from '@/components/NextImage';
 
 function Login({ providers }: any) {
-  const router = useRouter();
-  console.log(`🚀 ~ Login ~ router`, router);
+  // const router = useRouter();
+
   return (
     <div className='bg-black flex flex-col items-center justify-center min-h-screen w-full'>
       {/* <NextImage
@@ -31,8 +31,8 @@ function Login({ providers }: any) {
               className='bg-[#18D860] duration-500 p-5 rounded-full shadow-md text-white transform transition motion-safe:hover:scale-110 focus:outline-none'
               onClick={() =>
                 signIn(provider.id, {
-                  // callbackUrl: '/',
-                  callbackUrl: 'https://spotlist-refurbished.vercel.app/',
+                  callbackUrl: '/',
+                  // callbackUrl: 'https://spotlist-refurbished.vercel.app/',
                   // callbackUrl: router.query.callbackUrl as string,
                 })
               }
