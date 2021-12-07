@@ -44,12 +44,18 @@ export default NextAuth({
     signIn: '/login',
   },
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      if (url.startsWith(baseUrl)) return url;
-      // Allows relative callback URLs
-      else if (url.startsWith('/')) return new URL(url, baseUrl).toString();
-      return baseUrl;
-    },
+    // async redirect({ url, baseUrl }) {
+    //   if (url.startsWith(baseUrl)) return url;
+    //   // Allows relative callback URLs
+    //   else if (url.startsWith('/')) return new URL(url, baseUrl).toString();
+    //   return baseUrl;
+    // },
+
+    // async redirect({ url, baseUrl }) {
+    //   return url.startsWith(baseUrl)
+    //     ? Promise.resolve(url)
+    //     : Promise.resolve(baseUrl);
+    // },
 
     async jwt({ token, account, user }: any) {
       // Initial sign in
