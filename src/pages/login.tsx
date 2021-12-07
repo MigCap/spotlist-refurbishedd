@@ -31,7 +31,7 @@ function Login({ providers }: any) {
               className='bg-[#18D860] duration-500 p-5 rounded-full shadow-md text-white transform transition motion-safe:hover:scale-110 focus:outline-none'
               onClick={() =>
                 signIn(provider.id, {
-                  callbackUrl: '/',
+                  callbackUrl: router.query.callbackUrl as string,
                 })
               }
             >
