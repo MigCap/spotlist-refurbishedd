@@ -1,6 +1,3 @@
-// import { useEffect } from 'react';
-import { useEffect } from 'react';
-
 import TopSection from '@/components/layout/TopSection';
 
 function ArtistPage({
@@ -25,7 +22,9 @@ function ArtistPage({
           className={`bg-gradient-to-b flex ${color} h-80 items-end p-8 space-x-7 text-white to-black`}
           style={
             imgs?.[0] && {
-              background: `top 50% center / cover fixed  no-repeat url(${imgs?.[0]})`,
+              background: `top 50% center / cover fixed  no-repeat url(${
+                imgs?.length > 1 ? imgs?.[1] : imgs?.[0]
+              })`,
             }
           }
         >
@@ -120,9 +119,10 @@ export async function getServerSideProps(context: any) {
           throw console.log(err);
         }))) ??
     null;
+  const encodedArtistsName = encodeURIComponent(artistName);
 
   const artistInfoWithImg = await fetch(
-    `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${artistName}`
+    `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${encodedArtistsName}`
   ).then((res) => res?.json() ?? null);
 
   return {

@@ -1,11 +1,11 @@
-import clsx from 'clsx';
-import { shuffle } from 'lodash';
-import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
-import { useCallback, useEffect } from 'react';
+// import clsx from 'clsx';
+// import { shuffle } from 'lodash';
+// import { useRouter } from 'next/router';
+// import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { colors, routesConfig } from '@/lib/config';
+// import { colors, routesConfig } from '@/lib/config';
 import { getDayPart } from '@/lib/helper';
 import useSpotify from '@/hooks/useSpotify';
 
@@ -23,6 +23,7 @@ export default function HomePage() {
   const [recentlyPlayedTracks, setRecentlyPlayedTracks] = useRecoilState<any>(
     recentlyPlayedTracksState
   );
+  console.log(`🚀 ~ HomePage ~ recentlyPlayedTracks`, recentlyPlayedTracks);
 
   const spotifyApi = useSpotify();
 
@@ -95,12 +96,12 @@ export default function HomePage() {
               track: {
                 id,
                 name: trackName,
-                album: { name: albumName, images },
+                album: { id: albumId, name: albumName, images },
               },
             }: any) => (
               <UnstyledLink
                 key={id + trackName}
-                href={`/playlist/${id}`}
+                href={`/album/${albumId}`}
                 className='overflow-hidden'
                 onClick={() => setPlaylistId(id)}
               >
