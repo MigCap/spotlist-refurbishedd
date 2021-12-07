@@ -13,10 +13,13 @@ function Login({ providers }: any) {
         useSkeleton
       /> */}
       <img
-        className='mb-5 w-52'
+        className='mb-5 w-40'
         src='/images/spotify-logo.png'
         alt='spotify-logo'
       />
+      <h1 className='font-bold mb-5 py-5 text-2xl text-white'>
+        Spotify clone v2.0
+      </h1>
       {Object.values(providers).map((provider: any) => {
         return (
           <div key={provider.name}>

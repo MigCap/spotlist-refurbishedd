@@ -8,3 +8,7 @@ export const isPlayingState = atom({
   key: 'isPlayingState',
   default: false,
 });
+export const recentlyPlayedTracksState: any = atom({
+  key: 'recentlyPlayedTracksState',
+  default: null,
+});

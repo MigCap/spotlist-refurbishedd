@@ -1,4 +1,6 @@
 // import { useEffect } from 'react';
+import { useEffect } from 'react';
+
 import TopSection from '@/components/layout/TopSection';
 
 function ArtistPage({

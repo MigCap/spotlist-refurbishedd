@@ -19,7 +19,9 @@ import { useRecoilState } from 'recoil';
 import useSongInfo from '@/hooks/useSongInfo';
 import useSpotify from '@/hooks/useSpotify';
 
-import { currentTrackIdState, isPlayingState } from '@/atoms/songAtom';
+import CustomLink from '@/components/links/CustomLink';
+
+import { currentTrackIdState, isPlayingState } from '@/atoms/songsAtom';
 
 function Player() {
   // const { data: session, status } = useSession();
@@ -89,7 +91,11 @@ function Player() {
         <div className='flex flex-col-end-1 items-center'>
           <div className='text-sm lg:text-base'>
             <h3>{songInfo?.name}</h3>
-            <p className='text-gray-500'>{songInfo?.artists?.[0]?.name}</p>
+            <CustomLink href={`/artist/${songInfo?.artists?.[0]?.name}`}>
+              <p className='text-gray-500 text-xs'>
+                {songInfo?.artists?.[0]?.name}
+              </p>
+            </CustomLink>
           </div>
           <HeartIcon className='ml-4 player-button' />
         </div>

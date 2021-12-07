@@ -3,10 +3,10 @@ import { useSetRecoilState } from 'recoil';
 
 import { millisToMinutesAndSeconds } from '@/lib/helper';
 
-// import useSpotify from '@/hooks/useSpotify';
-import { currentTrackIdState, isPlayingState } from '@/atoms/songAtom';
+import CustomLink from '@/components/links/CustomLink';
 
-import CustomLink from './links/CustomLink';
+// import useSpotify from '@/hooks/useSpotify';
+import { currentTrackIdState, isPlayingState } from '@/atoms/songsAtom';
 
 function Song({ order, track: { track } }: any) {
   // const spotifyApi = useSpotify();

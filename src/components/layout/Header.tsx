@@ -1,11 +1,4 @@
-import {
-  Fragment,
-  useCallback,
-  useEffect,
-  // useLayoutEffect,
-  // useRef,
-  useState,
-} from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 import { useRouter } from 'next/router';
@@ -82,7 +75,7 @@ function Header() {
             leaveTo='transform opacity-0 scale-95'
           >
             <Menu.Items className='absolute bg-gray-900 mt-2 origin-top-right right-0 ring-1 ring-black ring-opacity-5 rounded-md shadow-lg text-sm w-56 focus:outline-none'>
-              <div className='px-3 py-2 rounded-md'>
+              <div className='cursor-pointer m-1 px-3 py-2 rounded-md hover:bg-gray-800'>
                 <Menu.Item>
                   <h1>Profile</h1>
                   {/* <h1>

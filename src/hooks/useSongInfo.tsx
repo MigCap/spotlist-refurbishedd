@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 
 import useSpotify from '@/hooks/useSpotify';
 
-import { currentTrackIdState } from '@/atoms/songAtom';
+import { currentTrackIdState } from '@/atoms/songsAtom';
 
 function useSongInfo() {
   const spotifyApi = useSpotify();
