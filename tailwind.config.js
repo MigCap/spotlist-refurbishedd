@@ -55,7 +55,19 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    // extend: {
+    //   animation: {
+    //     fadeIn: 'fadeIn 2s ease-in forwards',
+    //   },
+    //   keyframes: {
+    //     fadeIn: {
+    //       '0%': { opacity: 0 },
+    //       '100%': { opacity: 1 },
+    //     },
+    //   },
+    // },
+    animation: ['motion-safe'],
+    // dropShadow: ['hover', 'focus'],
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/forms'), require('tailwind-scrollbar-hide')],
 };

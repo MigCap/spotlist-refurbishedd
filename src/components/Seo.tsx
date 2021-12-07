@@ -5,12 +5,12 @@ import { openGraph } from '@/lib/helper';
 
 // !STARTERCONF Change these default meta
 const defaultMeta = {
-  title: 'Next.js + Tailwind CSS + TypeScript Starter',
-  siteName: 'Next.js + Tailwind CSS + TypeScript Starter',
+  title: 'Spotify clone v2.0',
+  siteName: 'Spotify clone v2.0',
   description:
-    'A starter for Next.js, Tailwind CSS, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky',
-  url: 'https://tsnext-tw.thcl.dev',
-  image: 'https://theodorusclarence.com/favicon/large-og.jpg',
+    'A spotify client app clone, built with Next.js, Tailwind CSS, and TypeScript with Absolute Import, Seo, Link component, Husky commit linting staging etc...',
+  url: 'https://miguelcapellan.com',
+  image: 'https://theodorusclarence.com/favicon/large-og.png',
   type: 'website',
   robots: 'follow, index',
 };

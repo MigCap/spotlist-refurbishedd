@@ -1,62 +1,57 @@
-import * as React from 'react';
+import clsx from 'clsx';
+import { shuffle } from 'lodash';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import { useCallback, useEffect } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import Layout from '@/components/layout/Layout';
-import ArrowLink from '@/components/links/ArrowLink';
-import ButtonLink from '@/components/links/ButtonLink';
-import CustomLink from '@/components/links/CustomLink';
+import { colors, routesConfig } from '@/lib/config';
+import { getDayPart } from '@/lib/helper';
+import useSpotify from '@/hooks/useSpotify';
+
 import UnstyledLink from '@/components/links/UnstyledLink';
 import Seo from '@/components/Seo';
 
-// !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
-// Before you begin editing, follow all comments with `STARTERCONF`,
-// to customize the default configuration.
+import { playlistIdState, playlistsState } from '@/atoms/playlistsAtom';
 
 export default function HomePage() {
+  const playlists = useRecoilValue(playlistsState);
+  const setPlaylistId = useSetRecoilState(playlistIdState);
+
   return (
-    <Layout>
+    <>
       {/* <Seo templateTitle='Home' /> */}
-      <Seo />
+      <Seo templateTitle='Spotlists 2.0' />
 
-      <main>
-        <section className='bg-white'>
-          <div className='layout flex flex-col justify-center items-center min-h-screen text-center'>
-            <h1>Next.js + Tailwind CSS + TypeScript Starter</h1>
-            <p className='mt-2 text-sm text-gray-800'>
-              A starter for Next.js, Tailwind CSS, and TypeScript with Absolute
-              Import, Seo, Link component, pre-configured with Husky{' '}
-            </p>
-            <p className='mt-2 text-sm text-gray-700'>
-              <ArrowLink href='https://github.com/theodorusclarence/ts-nextjs-tailwind-starter'>
-                See the repository
-              </ArrowLink>
-            </p>
+      <div
+        className={`bg-gradient-to-b flex flex-col from-gray-700 min-h-screen p-8 pl-7 pt-16 text-white to-black`}
+      >
+        <h1 className='font-bold mb-4 mt-4 text-2xl md:text-2xl xl:text-3xl'>
+          Good {getDayPart()}
+        </h1>
 
-            <ButtonLink className='mt-6' href='/components' variant='light'>
-              See all components
-            </ButtonLink>
-
-            <UnstyledLink
-              href='https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter'
-              className='mt-4'
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                width='92'
-                height='32'
-                src='https://vercel.com/button'
-                alt='Deploy with Vercel'
-              />
-            </UnstyledLink>
-
-            <footer className='absolute bottom-2 text-gray-700'>
-              © {new Date().getFullYear()} By{' '}
-              <CustomLink href='https://theodorusclarence.com?ref=tsnextstarter'>
-                Theodorus Clarence
-              </CustomLink>
-            </footer>
-          </div>
-        </section>
-      </main>
-    </Layout>
+        <div className='gap-4 grid grid-cols-2'>
+          {playlists
+            ?.slice(0, 4)
+            ?.map(({ id, name, images }: any, i: number) => (
+              <UnstyledLink
+                key={id + name}
+                href={`/playlist/${id}`}
+                className=''
+                onClick={() => setPlaylistId(id)}
+              >
+                <div className='bg-dark bg-opacity-80 cursor-pointer flex items-center rounded hover:bg-gray-700'>
+                  <img
+                    className='h-14 min-h-[4rem] min-w-[4rem] rounded-bl-sm rounded-tl-sm w-14'
+                    src={images?.[0]?.url}
+                    alt=''
+                  />
+                  <h1 className='font-bold pl-4 text-xs'>{name}</h1>
+                </div>
+              </UnstyledLink>
+            ))}
+        </div>
+      </div>
+    </>
   );
 }

@@ -79,4 +79,4 @@ Don't forget to change the package name in package.json
 
 ### 4. Commit Message Convention
 
-This starter is using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), it is mandatory to use it to commit changes.
+This app is using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), it is mandatory to use it to commit changes.

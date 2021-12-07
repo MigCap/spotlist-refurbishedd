@@ -25,3 +25,18 @@ export function openGraph({
     ogTemplateTitle ? `&templateTitle=${ogTemplateTitle}` : ''
   }`;
 }
+
+export function getDayPart() {
+  const curHr = new Date().getHours();
+  return curHr < 12 ? 'Morning' : curHr < 18 ? 'Afternoon' : 'Evening';
+}
+
+// Format milliseconds into MM:SS
+export function millisToMinutesAndSeconds(millis: any) {
+  const minutes = Math.floor(millis / 60000);
+  const seconds: any = ((millis % 60000) / 1000).toFixed(0);
+
+  return seconds == 60
+    ? minutes + 1 + ':00'
+    : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+}

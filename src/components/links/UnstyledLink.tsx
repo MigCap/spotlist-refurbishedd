@@ -24,7 +24,7 @@ export default function UnstyledLink({
 
   if (!isNewTab) {
     return (
-      <Link href={href} {...nextLinkProps}>
+      <Link href={href} scroll {...nextLinkProps}>
         <a {...rest} className={className}>
           {children}
         </a>
