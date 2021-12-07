@@ -8,6 +8,7 @@ function Login({ providers }: any) {
   // const router = useRouter();
 
   let redirectUrl = 'http://location:3000';
+  console.log(`🚀 ~ Login ~ redirectUrl`, redirectUrl);
 
   useEffect(() => {
     const url = new URL(location.href);
@@ -32,7 +33,6 @@ function Login({ providers }: any) {
         Spotify clone v2.0
       </h1>
       {Object.values(providers).map((provider: any) => {
-        console.log(`🚀 ~ {Object.values ~ provider`, provider);
         return (
           <div key={provider.name}>
             <button
