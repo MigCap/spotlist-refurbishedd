@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import Router from 'next/router';
-import { SessionProvider } from 'next-auth/react';
+import { getSession, SessionProvider } from 'next-auth/react';
 import { useCallback, useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
 
@@ -12,6 +12,7 @@ import '@/styles/colors.css';
 import Layout from '@/components/layout/Layout';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+  console.log(`🚀 ~ MyApp ~ pageProps`, pageProps);
   console.log(`🚀 ~ MyApp ~ session`, session);
   const router = useRouter();
 
@@ -47,3 +48,13 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 }
 
 export default MyApp;
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+
+  return {
+    props: {
+      session,
+    },
+  };
+}

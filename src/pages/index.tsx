@@ -23,7 +23,6 @@ export default function HomePage() {
   const [recentlyPlayedTracks, setRecentlyPlayedTracks] = useRecoilState<any>(
     recentlyPlayedTracksState
   );
-  console.log(`🚀 ~ HomePage ~ recentlyPlayedTracks`, recentlyPlayedTracks);
 
   const spotifyApi = useSpotify();
 

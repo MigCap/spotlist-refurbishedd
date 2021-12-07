@@ -1,8 +1,11 @@
+import { useRouter } from 'next/router';
 import { getProviders, signIn } from 'next-auth/react';
 
 // import NextImage from '@/components/NextImage';
 
 function Login({ providers }: any) {
+  const router = useRouter();
+  console.log(`🚀 ~ Login ~ router`, router);
   return (
     <div className='bg-black flex flex-col items-center justify-center min-h-screen w-full'>
       {/* <NextImage
@@ -21,11 +24,16 @@ function Login({ providers }: any) {
         Spotify clone v2.0
       </h1>
       {Object.values(providers).map((provider: any) => {
+        console.log(`🚀 ~ {Object.values ~ provider`, provider);
         return (
           <div key={provider.name}>
             <button
               className='bg-[#18D860] duration-500 p-5 rounded-full shadow-md text-white transform transition motion-safe:hover:scale-110 focus:outline-none'
-              onClick={() => signIn(provider.id, { callbackUrl: '/' })}
+              onClick={() =>
+                signIn(provider.id, {
+                  callbackUrl: '/',
+                })
+              }
             >
               Login with {provider.name}
             </button>
