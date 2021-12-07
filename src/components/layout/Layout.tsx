@@ -1,4 +1,4 @@
-import { getSession, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 import Header from '@/components/layout/Header';
 import Sidebar from '@/components/layout/Sidebar';
@@ -6,11 +6,11 @@ import Player from '@/components/Player';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   // const { data: session, status } = useSession();
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
 
   // Put Header or Footer Here
 
-  // if (!session) return null;
+  if (!session) return null;
 
   return (
     <>
@@ -29,14 +29,4 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
     </>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-
-  return {
-    props: {
-      session,
-    },
-  };
 }
