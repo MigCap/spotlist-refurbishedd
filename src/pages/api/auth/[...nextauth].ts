@@ -40,9 +40,9 @@ export default NextAuth({
     // ...add more providers here
   ],
   secret: process.env.JWT_SECRET,
-  // pages: {
-  //   signIn: '/login',
-  // },
+  pages: {
+    signIn: '/login',
+  },
   callbacks: {
     // async redirect({ url, baseUrl }) {
     //   if (url.startsWith(baseUrl)) return url;
@@ -54,10 +54,8 @@ export default NextAuth({
     async redirect({ url, baseUrl }) {
       // console.log(`🚀 ~ redirect ~ baseUrl`, baseUrl);
       // console.log(`🚀 ~ redirect ~ url`, url);
-      // return url.startsWith(baseUrl)
-      //   ? Promise.resolve(url)
-      //   : Promise.resolve(baseUrl);
-      return baseUrl;
+      if (url.startsWith(baseUrl)) return url;
+      return new URL(url, baseUrl.replace('www.', '')).toString();
     },
 
     async jwt({ token, account, user }: any) {
