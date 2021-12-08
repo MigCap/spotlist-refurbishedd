@@ -12,7 +12,6 @@ import '@/styles/colors.css';
 import Layout from '@/components/layout/Layout';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  console.log(`🚀 ~ MyApp ~ session`, session);
   const router = useRouter();
 
   const resetWindowScrollPosition = useCallback(

@@ -44,15 +44,6 @@ export default NextAuth({
     signIn: '/login',
   },
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      // console.log(`🚀 ~ redirect ~ baseUrl`, baseUrl);
-      // console.log(`🚀 ~ redirect ~ url`, url);
-      if (url.startsWith(baseUrl)) return url;
-      // Allows relative callback URLs
-      else if (url.startsWith('/')) return new URL(url, baseUrl).toString();
-      return baseUrl;
-    },
-
     async jwt({ token, account, user }: any) {
       // Initial sign in
       if (account && user) {
