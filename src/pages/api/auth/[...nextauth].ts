@@ -52,11 +52,12 @@ export default NextAuth({
     // },
 
     async redirect({ url, baseUrl }) {
-      console.log(`🚀 ~ redirect ~ baseUrl`, baseUrl);
-      console.log(`🚀 ~ redirect ~ url`, url);
-      return url.startsWith(baseUrl)
-        ? Promise.resolve(url)
-        : Promise.resolve(baseUrl);
+      // console.log(`🚀 ~ redirect ~ baseUrl`, baseUrl);
+      // console.log(`🚀 ~ redirect ~ url`, url);
+      // return url.startsWith(baseUrl)
+      //   ? Promise.resolve(url)
+      //   : Promise.resolve(baseUrl);
+      return baseUrl;
     },
 
     async jwt({ token, account, user }: any) {
@@ -90,4 +91,5 @@ export default NextAuth({
       return session;
     },
   },
+  debug: true,
 });
