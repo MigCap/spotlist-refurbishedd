@@ -22,9 +22,15 @@ function ArtistPage({
           className={`bg-gradient-to-b flex ${color} h-80 items-end p-8 space-x-7 text-white to-black`}
           style={
             imgs?.[0] && {
-              background: `top 50% center / cover fixed  no-repeat url(${
+              // background: `top 50% center / cover fixed  no-repeat url(${
+              //   imgs?.length > 1 ? imgs?.[1] : imgs?.[0]
+              // })`,
+              background: `url(${
                 imgs?.length > 1 ? imgs?.[1] : imgs?.[0]
-              })`,
+              }) no-repeat`,
+              backgroundAttachment: 'fixed',
+              backgroundPosition: 'center center',
+              backgroundSize: 'cover',
             }
           }
         >
