@@ -48,11 +48,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 export default MyApp;
 
 export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-
   return {
     props: {
-      session,
+      session: await getSession(context),
     },
   };
 }

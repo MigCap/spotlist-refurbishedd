@@ -40,9 +40,9 @@ export default NextAuth({
     // ...add more providers here
   ],
   secret: process.env.JWT_SECRET,
-  pages: {
-    signIn: '/login',
-  },
+  // pages: {
+  //   signIn: '/login',
+  // },
   callbacks: {
     // async redirect({ url, baseUrl }) {
     //   if (url.startsWith(baseUrl)) return url;
