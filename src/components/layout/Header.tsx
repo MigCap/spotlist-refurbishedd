@@ -35,7 +35,7 @@ function Header() {
       className={clsx(
         'duration-2000 sticky text-white top-0 transition-all z-50 motion-safe:animate-fadeIn',
         containerWindowHeight > 300 &&
-          'bg-gradient-to-b from-gray-700 h-20 to-black animate-fadeIn'
+          'md:bg-gradient-to-b md:from-gray-700 md:h-20 md:to-black animate-fadeIn'
       )}
       data-animate-type='motion-safe:animate-fadeIn'
     >
@@ -48,7 +48,7 @@ function Header() {
           <ChevronLeftIcon className='h-5 w-5' />
         </button>
       </div>
-      <div className='absolute left-[85vw] text-white top-4 md:left-[70vw] lg:left-[65vw]'>
+      <div className='absolute left-[80vw] text-white top-4 md:left-[70vw] lg:left-[65vw]'>
         <Menu as='div' className='inline-block relative text-left w-max'>
           <Menu.Button>
             <div className='bg-dark cursor-pointer flex items-center p-1 rounded-full space-x-3'>

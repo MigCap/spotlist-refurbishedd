@@ -42,10 +42,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </main>
-
-        <div className='bottom-0 sticky'>
-          <Player />
-        </div>
+        <Player />
       </div>
     </>
   );

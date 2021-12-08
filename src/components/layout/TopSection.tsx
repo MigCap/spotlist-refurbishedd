@@ -20,7 +20,7 @@ function TopSection({ CustomTopSection }: any) {
   return (
     <>
       <section
-        className={`bg-gradient-to-b flex ${color} h-80 items-end p-8 space-x-7 text-white to-black`}
+        className={`bg-gradient-to-b flex ${color} h-80 md:h-96 items-end p-8 space-x-7 text-white to-black`}
       >
         <img
           className='h-44 shadow-2xl w-44'

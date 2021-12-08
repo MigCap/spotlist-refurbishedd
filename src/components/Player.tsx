@@ -80,7 +80,7 @@ function Player() {
   }, [debouncedAdjustVolume, volume]);
 
   return (
-    <div className='bg-gradient-to-b from-black grid grid-cols-3 h-24 px-2 text-white text-xs to-gray-900 md:px-8 md:text-base'>
+    <div className='bg-gradient-to-b bottom-0 from-black grid grid-cols-3 h-16 px-1 sticky text-white text-xs to-gray-900 z-50 sm:h-24 sm:px-2 md:px-8 md:text-base'>
       {/* Left */}
       <div className='flex items-center space-x-4'>
         <img
@@ -102,8 +102,8 @@ function Player() {
       </div>
 
       {/* Center */}
-      <div className='flex items-center justify-evenly px-2'>
-        <SwitchHorizontalIcon className='player-button' />
+      <div className='flex items-center justify-evenly px-1 sm:px-2'>
+        <SwitchHorizontalIcon className='hidden player-button sm:block' />
         <RewindIcon
           // onClick={() => spotifyApi.skipToPrevious()} -- API not working
           className='player-button'
@@ -122,7 +122,7 @@ function Player() {
         )}
 
         <FastForwardIcon className='player-button' />
-        <ReplyIcon className='player-button' />
+        <ReplyIcon className='hidden player-button sm:block' />
       </div>
 
       {/* Right */}

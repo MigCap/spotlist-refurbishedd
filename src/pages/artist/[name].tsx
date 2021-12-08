@@ -19,7 +19,7 @@ function ArtistPage({
     return (
       <>
         <section
-          className={`bg-gradient-to-b flex ${color} h-80 items-end p-8 space-x-7 text-white to-black`}
+          className={`bg-gradient-to-b flex ${color} h-80 md:h-96 items-end p-8 space-x-7 text-white to-black`}
           style={
             imgs?.[0] && {
               // background: `top 50% center / cover fixed  no-repeat url(${
