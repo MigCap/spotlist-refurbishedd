@@ -16,10 +16,10 @@ function Header() {
 
   const router = useRouter();
 
-  const [clientWindowHeight, setClientWindowHeight] = useState<any>('');
+  const [containerWindowHeight, setContainerWindowHeight] = useState<any>('');
 
   const handleScroll = useCallback((e: any) => {
-    setClientWindowHeight(e.target.scrollTop);
+    setContainerWindowHeight(e.target.scrollTop);
   }, []);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function Header() {
     <header
       className={clsx(
         'duration-2000 sticky text-white top-0 transition-all z-50 motion-safe:animate-fadeIn',
-        clientWindowHeight > 300 &&
+        containerWindowHeight > 300 &&
           'bg-gradient-to-b from-gray-700 h-20 to-black animate-fadeIn'
       )}
       data-animate-type='motion-safe:animate-fadeIn'
@@ -43,28 +43,26 @@ function Header() {
         <button
           type='button'
           onClick={() => router.pathname !== '/login' && router.back()}
-          className='bg-black p-2 rounded-full'
+          className='bg-black p-2 rounded-full hover:bg-gray-900'
         >
           <ChevronLeftIcon className='h-5 w-5' />
         </button>
       </div>
-      <div className='absolute right-8 text-white top-5'>
-        <Menu as='div' className='inline-block relative text-left'>
-          <div>
-            <Menu.Button>
-              <div className='bg-gray-900 cursor-pointer flex items-center opacity-90 p-1 rounded-full space-x-3 hover:opacity-80'>
-                <img
-                  className='h-8 rounded-full w-8 lg:h-10 lg:w-10'
-                  src={session?.user?.image as string}
-                  alt={session?.user?.image as string}
-                />
-                <div className='hidden pr-2 lg:flex lg:items-center'>
-                  <h2>{session?.user?.name}</h2>
-                  <ChevronDownIcon className='h-5 ml-2 w-5' />
-                </div>
+      <div className='absolute left-[85vw] text-white top-4 md:left-[70vw] lg:left-[65vw]'>
+        <Menu as='div' className='inline-block relative text-left w-max'>
+          <Menu.Button>
+            <div className='bg-dark cursor-pointer flex items-center p-1 rounded-full space-x-3'>
+              <img
+                className='h-8 rounded-full w-8 lg:h-10 lg:w-10'
+                src={session?.user?.image as string}
+                alt={session?.user?.image as string}
+              />
+              <div className='hidden pr-2 lg:flex lg:items-center'>
+                <h2>{session?.user?.name}</h2>
+                <ChevronDownIcon className='h-5 ml-2 w-5' />
               </div>
-            </Menu.Button>
-          </div>
+            </div>
+          </Menu.Button>
           <Transition
             as={Fragment}
             enter='transition ease-out duration-100'

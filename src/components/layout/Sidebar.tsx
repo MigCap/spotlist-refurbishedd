@@ -45,7 +45,7 @@ function Sidebar() {
 
   return (
     <>
-      <div className='border-gray-900 border-r h-screen hidden p-4 text-gray-500 text-xs sm:max-w-[10rem] sm:min-w-[10rem] md:inline-flex lg:max-w-[15rem] lg:min-w-[12rem] lg:text-sm'>
+      <div className='border-gray-900 border-r h-screen hidden p-4 text-gray-500 text-xs sm:max-w-[10rem] sm:min-w-[10rem] md:inline-flex lg:max-w-[12rem] lg:min-w-[12rem] lg:text-sm'>
         <div className=''>
           <img
             className='mb-5 px-5 py-0'
