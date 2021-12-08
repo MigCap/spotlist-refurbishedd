@@ -51,11 +51,13 @@ export default NextAuth({
     //   return baseUrl;
     // },
 
-    // async redirect({ url, baseUrl }) {
-    //   return url.startsWith(baseUrl)
-    //     ? Promise.resolve(url)
-    //     : Promise.resolve(baseUrl);
-    // },
+    async redirect({ url, baseUrl }) {
+      console.log(`🚀 ~ redirect ~ baseUrl`, baseUrl);
+      console.log(`🚀 ~ redirect ~ url`, url);
+      return url.startsWith(baseUrl)
+        ? Promise.resolve(url)
+        : Promise.resolve(baseUrl);
+    },
 
     async jwt({ token, account, user }: any) {
       // Initial sign in

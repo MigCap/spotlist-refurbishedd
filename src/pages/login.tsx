@@ -7,13 +7,14 @@ import { useEffect } from 'react';
 function Login({ providers }: any) {
   // const router = useRouter();
 
-  let redirectUrl = 'http://location:3000';
-  console.log(`🚀 ~ Login ~ redirectUrl`, redirectUrl);
+  // let redirectUrl = 'http://location:3000';
 
-  useEffect(() => {
-    const url = new URL(location.href);
-    redirectUrl = url.searchParams.get('callbackUrl')!;
-  });
+  // useEffect(() => {
+  //   const url = new URL(location.href);
+  //   console.log(`🚀 ~ useEffect ~ url`, url);
+  //   redirectUrl = url.searchParams.get('callbackUrl')!;
+  //   console.log(`🚀 ~ useEffect ~ redirectUrl`, redirectUrl);
+  // });
 
   return (
     <div className='bg-black flex flex-col items-center justify-center min-h-screen w-full'>
@@ -39,8 +40,8 @@ function Login({ providers }: any) {
               className='bg-[#18D860] duration-500 p-5 rounded-full shadow-md text-white transform transition motion-safe:hover:scale-110 focus:outline-none'
               onClick={() =>
                 signIn(provider.id, {
-                  callbackUrl: redirectUrl,
-                  // callbackUrl: '/',
+                  // callbackUrl: redirectUrl,
+                  callbackUrl: '/',
                   // callbackUrl: 'https://spotlist-refurbished.vercel.app/',
                   // callbackUrl: router.query.callbackUrl as string,
                 })
