@@ -12,34 +12,28 @@ import '@/styles/colors.css';
 import Layout from '@/components/layout/Layout';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const resetWindowScrollPosition = useCallback(
-    () => window.scrollTo(0, 0),
-    []
-  );
+  // const resetWindowScrollPosition = useCallback(
+  //   () => window.scrollTo(0, 0),
+  //   []
+  // );
 
-  useEffect(() => {
-    Router.events.on('routeChangeComplete', resetWindowScrollPosition);
+  // useEffect(() => {
+  //   Router.events.on('routeChangeComplete', resetWindowScrollPosition);
 
-    return () => {
-      Router.events.off('routeChangeComplete', resetWindowScrollPosition);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   return () => {
+  //     Router.events.off('routeChangeComplete', resetWindowScrollPosition);
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  const isLogin = router.pathname === '/login';
+  // const isLogin = router.pathname === '/login';
 
   return (
     <SessionProvider session={session}>
       <RecoilRoot>
-        {!isLogin ? (
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        ) : (
-          <Component {...pageProps} />
-        )}
+        <Component {...pageProps} />
       </RecoilRoot>
     </SessionProvider>
   );
