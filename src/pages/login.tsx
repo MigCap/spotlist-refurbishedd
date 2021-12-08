@@ -41,7 +41,7 @@ function Login({ providers }: any) {
               onClick={() =>
                 signIn(provider.id, {
                   // callbackUrl: redirectUrl,
-                  callbackUrl: process.env.NEXTAUTH_URL as any,
+                  callbackUrl: 'https://spotlist-refurbished.vercel.app/',
                   // callbackUrl: 'https://spotlist-refurbished.vercel.app/',
                   // callbackUrl: router.query.callbackUrl as string,
                 })
