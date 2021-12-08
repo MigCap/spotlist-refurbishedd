@@ -38,7 +38,14 @@ function Login({ providers }: any) {
           <div key={provider.name}>
             <button
               className='bg-[#18D860] duration-500 p-5 rounded-full shadow-md text-white transform transition motion-safe:hover:scale-110 focus:outline-none'
-              onClick={() => signIn(provider.id)}
+              onClick={() =>
+                signIn(provider.id, {
+                  // callbackUrl: redirectUrl,
+                  callbackUrl: process.env.NEXTAUTH_URL as any,
+                  // callbackUrl: 'https://spotlist-refurbished.vercel.app/',
+                  // callbackUrl: router.query.callbackUrl as string,
+                })
+              }
             >
               Login with {provider.name}
             </button>
