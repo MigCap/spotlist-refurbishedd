@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: 'https://miguelcapellan.com/',
+  siteUrl: 'https://spotlist-refurbished.vercel.app/',
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [{ userAgent: '*', allow: '/' }],
