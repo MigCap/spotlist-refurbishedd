@@ -25,15 +25,20 @@ function Song({ order, track: { track } }: any) {
 
   return (
     <button onClick={playSong}>
-      <div className='cursor-pointer grid grid-cols-2 px-5 py-4 rounded-lg text-gray-500 text-xs lg:text-base hover:bg-gray-900'>
-        <div className='flex items-center space-x-4'>
+      <div
+        style={{
+          gridTemplateColumns: '80% 20%',
+        }}
+        className='cursor-pointer grid px-5 py-4 rounded-lg text-gray-500 text-xs md:grid-cols-2 lg:text-base hover:bg-gray-900'
+      >
+        <div className='flex items-center space-x-2 md:space-x-4'>
           <p>{order + 1}</p>
           <img
             className='h-10 w-10'
             src={track?.album?.images?.[0]?.url}
             alt=''
           />
-          <div className='flex flex-col w-36 lg:w-64'>
+          <div className='flex flex-col truncate md:w-36 lg:w-64'>
             <p className='mr-auto text-white truncate'>{track?.name}</p>
             <div className='mr-auto'>
               <CustomLink href={`/artist/${track?.artists?.[0]?.name}`}>
@@ -42,8 +47,8 @@ function Song({ order, track: { track } }: any) {
             </div>
           </div>
         </div>
-        <div className='flex items-center justify-between ml-auto md:ml-0'>
-          <p className='hidden w-40 md:inline hover:text-white hover:underline'>
+        <div className='flex items-center justify-between ml-auto'>
+          <p className='hidden truncate w-40 md:inline hover:text-white hover:underline'>
             {track?.album?.name}
           </p>
           <p>{millisToMinutesAndSeconds(track?.duration_ms)}</p>

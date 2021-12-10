@@ -56,7 +56,7 @@ function ArtistPage({
       <TopSection CustomTopSection={CustomTopSection} />
 
       <div
-        className={`flex flex-col p-8 pb-28 pl-7 pt-8 space-y-1 text-white bg-gradient-to-b from-gray-800 to-black`}
+        className={`flex flex-col p-8 pb-28 pl-7 md:pb-44 pt-8 space-y-1 text-white bg-gradient-to-b from-gray-800 to-black`}
       >
         <p className='pt-0 py-5'>
           {artistInfo?.artist?.bio?.summary.startsWith(' <')

@@ -11,7 +11,7 @@ import UnstyledLink from '@/components/links/UnstyledLink';
 
 import { playlistIdState, playlistsState } from '@/atoms/playlistsAtom';
 
-function Sidebar() {
+function Sidebar({ className }: { className?: string }) {
   const { data: session } = useSession();
 
   const spotifyApi = useSpotify();
@@ -45,7 +45,9 @@ function Sidebar() {
 
   return (
     <>
-      <div className='border-gray-900 border-r h-screen hidden p-4 text-gray-500 text-xs sm:max-w-[10rem] sm:min-w-[10rem] md:inline-flex lg:max-w-[12rem] lg:min-w-[12rem] lg:text-sm'>
+      <div
+        className={`border-gray-900 border-r p-4 text-gray-500 text-xs lg:text-sm ${className}`}
+      >
         <div className=''>
           <img
             className='mb-5 px-5 py-0'
@@ -92,7 +94,7 @@ function Sidebar() {
           <hr className='border-gray-700 border-t-[0.1px]' />
 
           {/* Playlists... */}
-          <div className='h-2/3 overflow-y-scroll pb-24 scrollbar-hide space-y-4'>
+          <div className='h-2/3 overflow-y-scroll pb-28 scrollbar-hide space-y-4'>
             {playlists?.map((playlist: any) => (
               <UnstyledLink
                 key={playlist?.id}

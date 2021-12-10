@@ -85,50 +85,7 @@ export default function HomePage() {
             </UnstyledLink>
           ))}
         </div>
-        <h1 className='font-bold mb-4 mt-8 text-1xl md:text-1xl xl:text-2xl'>
-          Recently played tracks
-        </h1>
-        <div className='gap-4 grid grid-cols-1 sm:grid-cols-3'>
-          {recentlyPlayedTracks?.slice(0, 6)?.map(
-            ({
-              track: {
-                id,
-                name: trackName,
-                album: { id: albumId, name: albumName, images },
-              },
-            }: any) => (
-              <UnstyledLink
-                key={id + trackName}
-                href={`/album/${albumId}`}
-                className='overflow-hidden'
-                onClick={() => setPlaylistId(id)}
-              >
-                <div className='bg-dark bg-opacity-80 cursor-pointer duration-2000 flex flex-col h-60 p-3 rounded transition-all hover:bg-gray-700'>
-                  <NextImage
-                    alt={trackName}
-                    width={200}
-                    height={200}
-                    src={images?.[0]?.url}
-                    useSkeleton
-                    className='h-50 rounded-bl-sm rounded-tl-sm'
-                    imgClassName='h-50 rounded-bl-sm rounded-tl-sm'
-                  />
-                  {/* <img
-                    className='h-50 rounded-bl-sm rounded-tl-sm'
-                    src={images?.[0]?.url}
-                    alt=''
-                  /> */}
-                  <h1 className='font-bold pb-1 pt-4 self-start text-xs'>
-                    {trackName}
-                  </h1>
-                  <p className='self-start text-[0.7rem] text-gray-400 truncate w-[100%]'>
-                    {albumName}
-                  </p>
-                </div>
-              </UnstyledLink>
-            )
-          )}
-        </div>
+
         <h1 className='font-bold mb-4 mt-8 text-1xl md:text-1xl xl:text-2xl'>
           Top artists
         </h1>
@@ -179,6 +136,51 @@ export default function HomePage() {
               </div>
             </UnstyledLink>
           ))}
+        </div>
+
+        <h1 className='font-bold mb-4 mt-8 text-1xl md:text-1xl xl:text-2xl'>
+          Recently played tracks
+        </h1>
+        <div className='gap-4 grid grid-cols-1 sm:grid-cols-3'>
+          {recentlyPlayedTracks?.slice(0, 6)?.map(
+            ({
+              track: {
+                id,
+                name: trackName,
+                album: { id: albumId, name: albumName, images },
+              },
+            }: any) => (
+              <UnstyledLink
+                key={id + trackName}
+                href={`/album/${albumId}`}
+                className='overflow-hidden'
+                onClick={() => setPlaylistId(id)}
+              >
+                <div className='bg-dark bg-opacity-80 cursor-pointer duration-2000 flex flex-col h-60 p-3 rounded transition-all hover:bg-gray-700'>
+                  <NextImage
+                    alt={trackName}
+                    width={200}
+                    height={200}
+                    src={images?.[0]?.url}
+                    useSkeleton
+                    className='h-50 rounded-bl-sm rounded-tl-sm'
+                    imgClassName='h-50 rounded-bl-sm rounded-tl-sm'
+                  />
+                  {/* <img
+                    className='h-50 rounded-bl-sm rounded-tl-sm'
+                    src={images?.[0]?.url}
+                    alt=''
+                  /> */}
+                  <h1 className='font-bold pb-1 pt-4 self-start text-xs'>
+                    {trackName}
+                  </h1>
+                  <p className='self-start text-[0.7rem] text-gray-400 truncate w-[100%]'>
+                    {albumName}
+                  </p>
+                </div>
+              </UnstyledLink>
+            )
+          )}
         </div>
       </div>
     </>

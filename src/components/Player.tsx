@@ -36,14 +36,13 @@ function Player() {
 
   const fetchCurrentSong = useCallback(() => {
     if (!songInfo) {
-      spotifyApi.getMyCurrentPlayingTrack().then((data) => {
-        // console.log(`Now playing: ${data?.body?.item}`);
-        // setCurrenTrackId(data?.body?.item?.id);
-
-        spotifyApi.getMyCurrentPlaybackState().then((data) => {
-          setIsPlaying(data?.body?.is_playing);
-        });
-      });
+      // spotifyApi.getMyCurrentPlayingTrack().then((data) => {
+      //   // console.log(`Now playing: ${data?.body?.item}`);
+      //   setCurrenTrackId(data?.body?.item?.id);
+      // });
+      // spotifyApi.getMyCurrentPlaybackState().then((data) => {
+      //   setIsPlaying(data?.body?.is_playing);
+      // });
     }
   }, [setIsPlaying, songInfo, spotifyApi]);
 
@@ -55,15 +54,15 @@ function Player() {
   }, [currenTrackId, fetchCurrentSong, spotifyApi]);
 
   const handlePlayPause = useCallback(() => {
-    spotifyApi.getMyCurrentPlaybackState().then((data) => {
-      if (data?.body?.is_playing) {
-        // spotifyApi.pause();
-        setIsPlaying(false);
-      } else {
-        // spotifyApi.play();
-        setIsPlaying(true);
-      }
-    });
+    // spotifyApi.getMyCurrentPlaybackState().then((data) => {
+    //   if (data?.body?.is_playing) {
+    //     // spotifyApi.pause();
+    //     setIsPlaying(false);
+    //   } else {
+    //     // spotifyApi.play();
+    //     setIsPlaying(true);
+    //   }
+    // });
   }, [setIsPlaying, spotifyApi]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -78,9 +77,9 @@ function Player() {
   useEffect(() => {
     debouncedAdjustVolume(volume);
   }, [debouncedAdjustVolume, volume]);
-
+  // bg-gradient-to-b
   return (
-    <div className='bg-gradient-to-b bottom-0 from-black grid grid-cols-3 h-16 px-1 sticky text-white text-xs to-gray-900 z-50 sm:h-24 sm:px-2 md:px-8 md:text-base'>
+    <div className='bg-gradient-to-b bottom-0 from-black grid grid-cols-3 h-20 px-1 sticky text-white text-xs to-gray-800 z-50 sm:h-24 sm:px-2 md:px-8 md:text-base'>
       {/* Left */}
       <div className='flex items-center space-x-4'>
         <img

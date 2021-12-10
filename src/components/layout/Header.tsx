@@ -33,9 +33,9 @@ function Header() {
   return (
     <header
       className={clsx(
-        'duration-2000 sticky text-white top-0 transition-all z-50 motion-safe:animate-fadeIn',
+        'animate-fadeIn duration-2000 sticky text-white top-0 transition-all z-50 motion-safe:animate-fadeIn',
         containerWindowHeight > 300 &&
-          'md:bg-gradient-to-b md:from-gray-700 md:h-20 md:to-black animate-fadeIn'
+          'md:bg-gradient-to-b md:from-gray-700 md:h-20 md:to-black animate-fadeIn md:bg-opacity-30'
       )}
       data-animate-type='motion-safe:animate-fadeIn'
     >

@@ -15,20 +15,25 @@ function TopSection({ CustomTopSection }: any) {
     setColor(shuffle(colors).pop());
   }, [playlistId]);
 
-  if (CustomTopSection) return <CustomTopSection color={color} />;
+  if (CustomTopSection)
+    return (
+      <>
+        <CustomTopSection color={color} />
+      </>
+    );
 
   return (
     <>
       <section
-        className={`bg-gradient-to-b flex ${color} h-80 md:h-96 items-end p-8 space-x-7 text-white to-black`}
+        className={`bg-gradient-to-b flex flex-col ${color} h-80 md:h-96 items-center p-8 md:space-x-7 text-white md:items-end to-black md:flex-row`}
       >
         <img
-          className='h-44 shadow-2xl w-44'
+          className='h-[90%] shadow-2xl w-[90%] md:h-44 md:w-44'
           src={playlist?.images?.[0]?.url}
           alt=''
         />
         <div>
-          <p>PLAYLIST</p>
+          <p className='py-2 text-center md:p-0 md:text-left'>PLAYLIST</p>
           <h1 className='font-bold text-2xl md:text-3xl xl:text-5xl'>
             {playlist?.name}
           </h1>

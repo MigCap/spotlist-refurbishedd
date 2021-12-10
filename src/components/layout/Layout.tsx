@@ -12,11 +12,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const contentRef: any = useRef(null);
 
   const resetContentScrollPosition = useCallback(() => {
-    contentRef?.current?.scrollIntoView({
-      // behavior: 'smooth',
-      // block: 'start',
-      // inline: 'nearest',
-    });
+    contentRef?.current?.scrollIntoView();
+    // contentRef?.current?.scrollIntoView({
+    //   behavior: 'smooth',
+    //   block: 'start',
+    //   inline: 'nearest',
+    // });
   }, []);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <div className='bg-black h-screen overflow-hidden'>
         <main className='flex'>
-          <Sidebar />
+          <Sidebar className='h-screen hidden sm:w-[10rem] md:inline-flex lg:w-[12rem]' />
           <div className='w-[100%]'>
             <Header />
             <div className='flex-grow h-screen main overflow-y-scroll scrollbar-hide'>
