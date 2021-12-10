@@ -25,14 +25,14 @@ function TopSection({ CustomTopSection }: any) {
   return (
     <>
       <section
-        className={`bg-gradient-to-b flex flex-col ${color} h-80 md:h-96 items-center p-8 md:space-x-7 text-white md:items-end to-black md:flex-row`}
+        className={`bg-gradient-to-b flex flex-col ${color} md:h-96 items-center py-3 px-8 md:p-8 md:space-x-7 text-white md:items-end to-black md:flex-row`}
       >
         <img
           className='h-[90%] shadow-2xl w-[90%] md:h-44 md:w-44'
           src={playlist?.images?.[0]?.url}
           alt=''
         />
-        <div>
+        <div className='my-1'>
           <p className='py-2 text-center md:p-0 md:text-left'>PLAYLIST</p>
           <h1 className='font-bold text-2xl md:text-3xl xl:text-5xl'>
             {playlist?.name}
