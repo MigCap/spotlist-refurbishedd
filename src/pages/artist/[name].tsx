@@ -6,6 +6,12 @@ function ArtistPage({
   imgUrl,
   artistInfoWithImg,
 }: any) {
+  const {
+    artist: {
+      tags: { tag: tags },
+    },
+  } = artistInfo;
+
   const imgs = [
     imgUrl,
     artistInfoWithImg?.artists?.[0]?.strArtistThumb,
@@ -37,13 +43,7 @@ function ArtistPage({
           <div>
             <h1 className='font-bold text-7xl'>{artistName}</h1>
             <div className='flex pt-3 text-sm'>
-              {artistInfo?.artist?.tags?.tag?.map(
-                ({ name }: any, i: number) => (
-                  <p key={name} className='mr-1'>
-                    {i === 0 ? `${name}` : `- ${name}`}
-                  </p>
-                )
-              )}
+              <p>{tags?.map?.(({ name }: any) => name).join(' - ')}</p>
             </div>
           </div>
         </section>
@@ -125,6 +125,7 @@ export async function getServerSideProps(context: any) {
           throw console.log(err);
         }))) ??
     null;
+
   const encodedArtistsName = encodeURIComponent(artistName);
 
   const artistInfoWithImg = await fetch(
