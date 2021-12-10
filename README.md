@@ -1,6 +1,8 @@
 <div align="center">
-  <h1>🔋 ts-nextjs-tailwind-starter</h1>
-  <p>Next.js + Tailwind CSS + TypeScript starter packed with useful development features.</p>
+  <h1>Spotify clone</h1>
+  <p>Version 2.0 of my spotify clone.</p>
+  <h1></h1>
+  <p>Initial scaffold: Next.js + Tailwind CSS + TypeScript starter packed with useful development features.</p>
   <p>Made by <a href="https://theodorusclarence.com">Theodorus Clarence</a></p>
   
   
