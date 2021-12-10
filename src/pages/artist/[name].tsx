@@ -1,3 +1,5 @@
+import { encodeRFC5987ValueChars } from '@/lib/helper';
+
 import TopSection from '@/components/layout/TopSection';
 
 function ArtistPage({
@@ -6,12 +8,6 @@ function ArtistPage({
   imgUrl,
   artistInfoWithImg,
 }: any) {
-  const {
-    artist: {
-      tags: { tag: tags },
-    },
-  } = artistInfo;
-
   const imgs = [
     imgUrl,
     artistInfoWithImg?.artists?.[0]?.strArtistThumb,
@@ -43,7 +39,11 @@ function ArtistPage({
           <div>
             <h1 className='font-bold text-7xl'>{artistName}</h1>
             <div className='flex pt-3 text-sm'>
-              <p>{tags?.map?.(({ name }: any) => name).join(' - ')}</p>
+              <p>
+                {artistInfo?.artist?.tags?.tag
+                  ?.map?.(({ name }: any) => name)
+                  .join(' - ')}
+              </p>
             </div>
           </div>
         </section>
@@ -86,18 +86,20 @@ export async function getServerSideProps(context: any) {
     params: { name: artistName },
   } = context;
 
+  const encodedArtistsName = encodeRFC5987ValueChars(artistName);
+
   const artistInfo = await fetch(
-    `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artistName}&api_key=${process.env.LAST_FM_KEY}&format=json`
+    `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedArtistsName}&api_key=${process.env.LAST_FM_KEY}&format=json`
   ).then((res) => res.json());
 
   const mbid = artistInfo?.artist?.mbid;
 
-  const url =
+  const musicbrainzUrl =
     'https://musicbrainz.org/ws/2/artist/' + mbid + '?inc=url-rels&fmt=json';
 
   const imgUrl =
     (mbid &&
-      (await fetch(url)
+      (await fetch(musicbrainzUrl)
         .then((res) => res.json())
         .then((out) => {
           const relations = out.relations;
@@ -125,8 +127,6 @@ export async function getServerSideProps(context: any) {
           throw console.log(err);
         }))) ??
     null;
-
-  const encodedArtistsName = encodeURIComponent(artistName);
 
   const artistInfoWithImg = await fetch(
     `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${encodedArtistsName}`

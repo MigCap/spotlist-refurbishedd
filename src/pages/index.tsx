@@ -19,12 +19,10 @@ export default function HomePage() {
   const setPlaylistId = useSetRecoilState(playlistIdState);
 
   const [topArtist, setTopArtists] = useRecoilState<any>(topArtistsState);
-  console.log(`🚀 ~ HomePage ~ topArtist`, topArtist);
 
   const [recentlyPlayedTracks, setRecentlyPlayedTracks] = useRecoilState<any>(
     recentlyPlayedTracksState
   );
-  console.log(`🚀 ~ HomePage ~ recentlyPlayedTracks`, recentlyPlayedTracks);
 
   const spotifyApi = useSpotify();
 
@@ -58,7 +56,7 @@ export default function HomePage() {
       <div
         className={`bg-gradient-to-b flex flex-col from-gray-800  p-8 pl-7 pt-16 pb-32 mb-24 text-white to-black`}
       >
-        <h1 className='font-bold mb-4 mt-4 text-2xl md:text-2xl xl:text-3xl'>
+        <h1 className='font-bold mb-4 mt-4 text-3xl xl:text-4xl'>
           Good {getDayPart()}
         </h1>
         <div className='gap-4 grid grid-cols-1 sm:grid-cols-2'>
@@ -84,7 +82,7 @@ export default function HomePage() {
               ))}
         </div>
 
-        <h1 className='font-bold mb-4 mt-8 text-1xl md:text-1xl xl:text-2xl'>
+        <h1 className='font-bold mb-3 mt-6 text-2xl xl:text-3xl'>
           Top artists
         </h1>
         <div className='gap-4 grid grid-cols-1 sm:grid-cols-3'>
@@ -139,7 +137,7 @@ export default function HomePage() {
               ))}
         </div>
 
-        <h1 className='font-bold mb-4 mt-8 text-1xl md:text-1xl xl:text-2xl'>
+        <h1 className='font-bold mb-3 mt-6 text-2xl xl:text-3xl'>
           Recently played tracks
         </h1>
         <div className='gap-4 grid grid-cols-1 sm:grid-cols-3'>
