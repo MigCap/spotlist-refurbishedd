@@ -47,7 +47,7 @@ function Header() {
       )}
       data-animate-type='motion-safe:animate-fadeIn'
     >
-      <div className='absolute left-18 ml-6 text-white top-5'>
+      <div className='absolute left-18 pl-6 text-white top-5'>
         <button
           type='button'
           onClick={() => router.pathname !== '/login' && router.back()}

@@ -28,20 +28,38 @@ export default function HomePage() {
 
   useEffect(() => {
     spotifyApi.getMyTopArtists().then(
-      function (data) {
-        const topArtists = data.body.items;
+      (data) => {
+        let topArtists = data.body.items;
+
+        const artistsUniqueIds = Array.from(
+          new Set(topArtists?.map((artist: any) => artist?.id))
+        );
+
+        topArtists = topArtists?.filter((artist: any) =>
+          artistsUniqueIds?.includes(artist?.id)
+        );
+
         setTopArtists(topArtists);
       },
-      function (err) {
+      (err) => {
         console.log('Something went wrong!', err);
       }
     );
     spotifyApi.getMyRecentlyPlayedTracks().then(
-      function (data) {
-        const recentlyPlayedTracks = data.body.items;
+      (data) => {
+        let recentlyPlayedTracks = data.body.items;
+
+        const uniquePlayedTracksIds = Array.from(
+          new Set(recentlyPlayedTracks?.map((track: any) => track?.track?.id))
+        );
+
+        recentlyPlayedTracks = recentlyPlayedTracks?.filter((track: any) =>
+          uniquePlayedTracksIds?.includes(track?.track?.id)
+        );
+
         setRecentlyPlayedTracks(recentlyPlayedTracks);
       },
-      function (err) {
+      (err) => {
         console.log('Something went wrong!', err);
       }
     );
@@ -155,11 +173,11 @@ export default function HomePage() {
                   <UnstyledLink
                     key={id + trackName}
                     href={`/album/${albumId}`}
-                    className='overflow-hidden'
+                    className=''
                     onClick={() => setPlaylistId(id)}
                   >
                     <div className='bg-dark bg-opacity-80 cursor-pointer duration-2000 flex flex-col h-60 p-3 rounded transition-all hover:bg-gray-700'>
-                      <NextImage
+                      {/* <NextImage
                         alt={trackName}
                         width={200}
                         height={200}
@@ -167,12 +185,22 @@ export default function HomePage() {
                         useSkeleton
                         className='h-50 rounded-bl-sm rounded-tl-sm'
                         imgClassName='h-50 rounded-bl-sm rounded-tl-sm'
+                      /> */}
+                      <div
+                        className='flex h-[100%] items-center justify-center w-[100%]'
+                        style={{
+                          backgroundImage: `url(${images?.[0]?.url})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundBlendMode: 'saturation',
+                        }}
                       />
                       {/* <img
-                    className='h-50 rounded-bl-sm rounded-tl-sm'
-                    src={images?.[0]?.url}
-                    alt=''
-                  /> */}
+                          className='h-20 rounded-bl-sm rounded-tl-sm'
+                          src={images?.[0]?.url}
+                          alt={trackName}
+                        /> */}
                       <h1 className='font-bold pb-1 pt-4 self-start text-xs'>
                         {trackName}
                       </h1>
