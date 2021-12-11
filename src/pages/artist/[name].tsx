@@ -123,7 +123,7 @@ function ArtistPage({
           </p>
         </div>
 
-        <div className='hidden pt-8 md:gap-6 md:grid md:grid-cols-3'>
+        <div className='gap-4 grid grid-cols-2 pt-8 md:gap-6 md:grid-cols-3'>
           {artistAlbums?.slice(0, 9)?.map(({ id, images, name }: any) => {
             const imgUrl = images?.find((img: any) => img?.height === 300)?.url;
             return (

@@ -46,7 +46,7 @@ function Sidebar({ className }: { className?: string }) {
   return (
     <>
       <div
-        className={`border-gray-900 border-r p-4 text-gray-500 text-xs lg:text-sm ${className}`}
+        className={`border-gray-900 border-r p-4 text-gray-500 text-xs lg:text-sm pb-28 ${className}`}
       >
         <div>
           <img
