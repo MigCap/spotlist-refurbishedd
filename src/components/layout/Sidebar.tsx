@@ -95,7 +95,7 @@ function Sidebar({ className }: { className?: string }) {
           <hr className='border-gray-700 border-t-[0.1px]' />
 
           {/* Playlists... */}
-          <div className='h-2/3 overflow-y-scroll pb-0 scrollbar-hide space-y-4'>
+          <div className='h-2/3 overflow-y-scroll pb-20 scrollbar-hide space-y-4'>
             {playlists?.map((playlist: any) => (
               <UnstyledLink
                 key={playlist?.id}

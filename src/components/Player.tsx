@@ -76,11 +76,11 @@ function Player() {
   }, [debouncedAdjustVolume, volume]);
 
   return (
-    <div className='absolute bg-gradient-to-b bottom-0 from-black grid grid-cols-3 h-20 px-1 text-white text-xs to-gray-800 w-screen z-50 sm:h-24 sm:px-2 md:px-6 md:text-base'>
+    <div className='bg-gradient-to-b bottom-0 from-black grid grid-cols-3 h-20 px-1 sticky text-white text-xs to-gray-800 z-50 sm:h-24 sm:px-2 md:px-8 md:text-base'>
       {/* Left */}
-      <div className='flex items-center space-x-2 sm:space-x-4'>
+      <div className='flex items-center justify-center space-x-2 sm:justify-start sm:space-x-4'>
         <img
-          className='h-10 hidden w-10 md:inline'
+          className='h-10 w-10'
           src={songInfo?.album?.images?.[0]?.url}
           alt=''
         />
@@ -89,7 +89,7 @@ function Player() {
             <h3 className='truncate'>{songInfo?.name}</h3>
             <p className='text-gray-500'>{songInfo?.artists?.[0]?.name}</p>
           </div>
-          <HeartIcon className='ml-4 player-button' />
+          <HeartIcon className='ml-1 player-button sm:ml-4' />
         </div>
       </div>
 
