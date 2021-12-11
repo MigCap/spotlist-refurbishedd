@@ -9,7 +9,7 @@ import UnstyledLink from '@/components/links/UnstyledLink';
 // import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
 
-import { artistState, topArtistsState } from '@/atoms/artistsAtom';
+import { topArtistsState } from '@/atoms/artistsAtom';
 import { playlistIdState, playlistsState } from '@/atoms/playlistsAtom';
 import { recentlyPlayedTracksState } from '@/atoms/tracksAtom';
 
@@ -17,7 +17,6 @@ export default function HomePage() {
   const playlists = useRecoilValue(playlistsState);
 
   const setPlaylistId = useSetRecoilState(playlistIdState);
-  const setArtist = useSetRecoilState(artistState);
   const [topArtists, setTopArtists] = useRecoilState<any>(topArtistsState);
   const [recentlyPlayedTracks, setRecentlyPlayedTracks] = useRecoilState<any>(
     recentlyPlayedTracksState
@@ -112,9 +111,8 @@ export default function HomePage() {
                 return (
                   <UnstyledLink
                     key={id + i}
-                    href={`/artist/${name}`}
+                    href={`/artist/${name}?id=${id}`}
                     className='overflow-hidden'
-                    onClick={() => setArtist(artist)}
                   >
                     <div className='bg-dark bg-opacity-80 cursor-pointer duration-2000 flex flex-col h-60 p-3 rounded transition-all sm:items-center hover:bg-gray-700'>
                       <div

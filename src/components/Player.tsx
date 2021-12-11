@@ -76,9 +76,9 @@ function Player() {
   useEffect(() => {
     debouncedAdjustVolume(volume);
   }, [debouncedAdjustVolume, volume]);
-  // bg-gradient-to-b
+
   return (
-    <div className='bg-gradient-to-b bottom-0 from-black grid grid-cols-3 h-20 px-1 sticky text-white text-xs to-gray-800 z-50 sm:h-24 sm:px-2 md:px-8 md:text-base'>
+    <div className='absolute bg-gradient-to-b bottom-0 from-black grid grid-cols-3 h-20 px-1 text-white text-xs to-gray-800 w-screen z-50 sm:h-24 sm:px-2 md:px-8 md:text-base'>
       {/* Left */}
       <div className='flex items-center space-x-4'>
         <img
@@ -89,7 +89,9 @@ function Player() {
         <div className='flex flex-col-end-1 items-center'>
           <div className='text-sm lg:text-base'>
             <h3>{songInfo?.name}</h3>
-            <CustomLink href={`/artist/${songInfo?.artists?.[0]?.name}`}>
+            <CustomLink
+              href={`/artist/${songInfo?.artists?.[0]?.name}?id=${songInfo?.artists?.[0]?.id}`}
+            >
               <p className='text-gray-500 text-xs'>
                 {songInfo?.artists?.[0]?.name}
               </p>

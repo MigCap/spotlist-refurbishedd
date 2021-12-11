@@ -61,15 +61,17 @@ function Song({
             <p className='text-left text-white truncate'>{name}</p>
             {/* Artists */}
             <div className='flex'>
-              {artists?.slice(0, 2)?.map((artist: any) => (
-                <CustomLink
-                  href={`/artist/${artist?.name}`}
-                  className='mr-2'
-                  key={artist?.id || artist?.name}
-                >
-                  <p>{artist?.name}</p>
-                </CustomLink>
-              ))}
+              {artists?.slice(0, 2)?.map((artist: any) => {
+                return (
+                  <CustomLink
+                    href={`/artist/${artist?.name}?id=${artist?.id}`}
+                    className='mr-2'
+                    key={artist?.id || artist?.name}
+                  >
+                    <p>{artist?.name}</p>
+                  </CustomLink>
+                );
+              })}
             </div>
           </div>
         </div>

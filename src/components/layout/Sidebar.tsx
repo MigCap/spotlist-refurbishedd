@@ -48,7 +48,7 @@ function Sidebar({ className }: { className?: string }) {
       <div
         className={`border-gray-900 border-r p-4 text-gray-500 text-xs lg:text-sm ${className}`}
       >
-        <div className=''>
+        <div>
           <img
             className='mb-5 px-5 py-0'
             src='/images/Spotify_Logo_CMYK_White.png'
@@ -95,7 +95,7 @@ function Sidebar({ className }: { className?: string }) {
           <hr className='border-gray-700 border-t-[0.1px]' />
 
           {/* Playlists... */}
-          <div className='h-2/3 overflow-y-scroll pb-28 scrollbar-hide space-y-4'>
+          <div className='h-2/3 overflow-y-scroll pb-0 scrollbar-hide space-y-4'>
             {playlists?.map((playlist: any) => (
               <UnstyledLink
                 key={playlist?.id}

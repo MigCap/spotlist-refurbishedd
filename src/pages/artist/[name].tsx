@@ -1,27 +1,24 @@
-// import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useEffect, useState } from 'react';
 
 import { encodeRFC5987ValueChars } from '@/lib/helper';
 import useRandomColor from '@/hooks/useRandomColor';
-
-// import useSpotify from '@/hooks/useSpotify';
-import { artistState } from '@/atoms/artistsAtom';
+import useSpotify from '@/hooks/useSpotify';
 
 function ArtistPage({
   artistName,
   artistInfo,
   imgUrl,
   artistInfoWithImg,
+  spotifyArtistId,
 }: any) {
-  // const spotifyApi = useSpotify();
+  const spotifyApi = useSpotify();
 
-  const artist: any = useRecoilValue(artistState);
+  const [artist, setArtistDetail] = useState<any>(null);
+  const [artistAlbums, setArtistAlbums] = useState<any>(null);
 
-  const imgUrlFromArtistState = artist?.images?.find(
-    (img: any) => img?.height === 640
-  )?.url;
-
-  // const [artistAlbums, setartistAlbums] = useState<any>(null);
+  const imgUrlFromArtistState =
+    artist?.name === artistName &&
+    artist?.images?.find((img: any) => img?.height === 640)?.url;
 
   const imgs = [
     imgUrlFromArtistState,
@@ -35,30 +32,40 @@ function ArtistPage({
 
   const color = useRandomColor();
 
-  // useEffect(() => {
-  //   if (artist?.id) {
-  //     spotifyApi.getArtistAlbums(artist?.id).then(
-  //       (data) => {
-  //         let artistAlbums = data?.body?.items;
+  useEffect(() => {
+    if (spotifyArtistId) {
+      spotifyApi.getArtist(spotifyArtistId).then(
+        (data) => {
+          const artist = data?.body;
 
-  //         const albumsUniqueIds = Array.from(
-  //           new Set(artistAlbums?.map((album: any) => album?.id))
-  //         );
+          setArtistDetail(artist);
+        },
+        (err) => {
+          console.log('Something went wrong!', err);
+        }
+      );
+      spotifyApi.getArtistAlbums(spotifyArtistId).then(
+        (data) => {
+          let artistAlbums = data?.body?.items;
 
-  //         artistAlbums = artistAlbums?.filter((album: any) =>
-  //         albumsUniqueIds?.includes(album?.id)
-  //         );
+          const albumsUniqueIds = Array.from(
+            new Set(artistAlbums?.map((album: any) => album?.id))
+          );
 
-  //         setartistAlbums(artistAlbums);
-  //       },
-  //       (err) => {
-  //         console.log('Something went wrong!', err);
-  //       }
-  //     );
-  //   }
+          artistAlbums = artistAlbums?.filter((album: any) =>
+            albumsUniqueIds?.includes(album?.id)
+          );
 
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+          setArtistAlbums(artistAlbums);
+        },
+        (err) => {
+          console.log('Something went wrong!', err);
+        }
+      );
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -96,25 +103,37 @@ function ArtistPage({
         </div>
       </section>
 
-      <div
-        className={`flex flex-col p-8 pb-28 pl-7 md:pb-44 pt-8 space-y-1 text-white bg-gradient-to-b from-gray-800 to-black`}
-      >
-        <p className='pt-0 py-5'>
-          {artistInfo?.artist?.bio?.summary.startsWith(' <')
-            ? 'No summary available'
-            : artistInfo?.artist?.bio?.summary}
-        </p>
-        <div className='gap-4 grid grid-cols-2'>
-          {imgs &&
-            imgs
-              ?.slice(0, 4)
-              ?.map((url: string) => (
-                <img key={url} className='shadow-2xl' src={url} alt='' />
-              ))}
+      <div className='bg-gradient-to-b from-gray-800 p-8 pb-28 pl-7 pt-8 text-white to-black md:pb-48'>
+        <div className={`flex flex-col space-y-1`}>
+          <p className='pt-0 py-5'>
+            {artistInfo?.artist?.bio?.summary.startsWith(' <')
+              ? 'No summary available'
+              : artistInfo?.artist?.bio?.summary}
+          </p>
+          <div className='gap-4 grid grid-cols-2'>
+            {imgs &&
+              imgs
+                ?.slice(0, 4)
+                ?.map((url: string) => (
+                  <img key={url} className='shadow-2xl' src={url} alt='' />
+                ))}
+          </div>
+          <p className='pt-10 py-3'>
+            {artistInfo?.artist?.bio?.content || 'No info available'}
+          </p>
         </div>
-        <p className='pt-10 py-3'>
-          {artistInfo?.artist?.bio?.content || 'No info available'}
-        </p>
+
+        <div className='hidden pt-8 md:gap-6 md:grid md:grid-cols-3'>
+          {artistAlbums?.slice(0, 9)?.map(({ id, images, name }: any) => {
+            const imgUrl = images?.find((img: any) => img?.height === 300)?.url;
+            return (
+              <div key={id} className='flex flex-col items-center'>
+                <img className='shadow-2xl' src={imgUrl} alt='' />
+                <p className='px-0 py-3 text-center'>{name}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );
@@ -124,7 +143,7 @@ export default ArtistPage;
 
 export async function getServerSideProps(context: any) {
   const {
-    params: { name: artistName },
+    query: { name: artistName, id: spotifyArtistId },
   } = context;
 
   const encodedArtistsName = encodeRFC5987ValueChars(artistName);
@@ -179,6 +198,7 @@ export async function getServerSideProps(context: any) {
       artistInfo,
       artistInfoWithImg,
       imgUrl,
+      spotifyArtistId,
     },
   };
 }
