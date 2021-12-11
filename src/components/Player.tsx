@@ -21,14 +21,14 @@ import useSpotify from '@/hooks/useSpotify';
 
 import CustomLink from '@/components/links/CustomLink';
 
-import { currentTrackIdState, isPlayingState } from '@/atoms/songsAtom';
+import { currentTrackIdState, isPlayingTrackState } from '@/atoms/tracksAtom';
 
 function Player() {
   // const { data: session, status } = useSession();
   const spotifyApi = useSpotify();
 
   const [currenTrackId, setCurrenTrackId] = useRecoilState(currentTrackIdState);
-  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingTrackState);
 
   const [volume, setVolume] = useState(50);
 

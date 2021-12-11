@@ -6,20 +6,19 @@ import { getDayPart } from '@/lib/helper';
 import useSpotify from '@/hooks/useSpotify';
 
 import UnstyledLink from '@/components/links/UnstyledLink';
-import NextImage from '@/components/NextImage';
+// import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
 
-import { topArtistsState } from '@/atoms/artistsAtom';
+import { artistState, topArtistsState } from '@/atoms/artistsAtom';
 import { playlistIdState, playlistsState } from '@/atoms/playlistsAtom';
-import { recentlyPlayedTracksState } from '@/atoms/songsAtom';
+import { recentlyPlayedTracksState } from '@/atoms/tracksAtom';
 
 export default function HomePage() {
   const playlists = useRecoilValue(playlistsState);
 
   const setPlaylistId = useSetRecoilState(playlistIdState);
-
-  const [topArtist, setTopArtists] = useRecoilState<any>(topArtistsState);
-
+  const setArtist = useSetRecoilState(artistState);
+  const [topArtists, setTopArtists] = useRecoilState<any>(topArtistsState);
   const [recentlyPlayedTracks, setRecentlyPlayedTracks] = useRecoilState<any>(
     recentlyPlayedTracksState
   );
@@ -45,6 +44,7 @@ export default function HomePage() {
         console.log('Something went wrong!', err);
       }
     );
+
     spotifyApi.getMyRecentlyPlayedTracks().then(
       (data) => {
         let recentlyPlayedTracks = data.body.items;
@@ -104,55 +104,35 @@ export default function HomePage() {
           Top artists
         </h1>
         <div className='gap-4 grid grid-cols-1 sm:grid-cols-3'>
-          {topArtist &&
-            shuffle(topArtist)
+          {topArtists &&
+            shuffle(topArtists)
               ?.slice(0, 6)
-              ?.map(({ id, name, images }: any, i: number) => (
-                <UnstyledLink
-                  key={id + i}
-                  href={`/artist/${name}`}
-                  className='overflow-hidden'
-                  onClick={() => setPlaylistId(id)}
-                >
-                  <div className='bg-dark bg-opacity-80 cursor-pointer duration-2000 flex flex-col h-60 p-3 rounded transition-all sm:items-center hover:bg-gray-700'>
-                    {/* <NextImage
-                  alt={name}
-                  width={'100%'}
-                  height={'70%'}
-                  src={images?.[0]?.url}
-                  useSkeleton
-                  className='block h-40 rounded-bl-sm rounded-tl-sm w-40'
-                  imgClassName='h-50 rounded-bl-sm rounded-tl-sm'
-                /> */}
-                    <div
-                      className='flex h-[100%] items-center justify-center rounded w-[100%]'
-                      style={{
-                        backgroundImage: `url(${images?.[0]?.url})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundBlendMode: 'saturation',
-                      }}
-                    >
-                      <h1 className='font-bold text-2xl'>{name}</h1>
+              ?.map((artist: any, i: number) => {
+                const { id, name, images } = artist;
+                return (
+                  <UnstyledLink
+                    key={id + i}
+                    href={`/artist/${name}`}
+                    className='overflow-hidden'
+                    onClick={() => setArtist(artist)}
+                  >
+                    <div className='bg-dark bg-opacity-80 cursor-pointer duration-2000 flex flex-col h-60 p-3 rounded transition-all sm:items-center hover:bg-gray-700'>
+                      <div
+                        className='flex h-[100%] items-center justify-center rounded w-[100%]'
+                        style={{
+                          backgroundImage: `url(${images?.[0]?.url})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundBlendMode: 'saturation',
+                        }}
+                      >
+                        <h1 className='font-bold text-2xl'>{name}</h1>
+                      </div>
                     </div>
-
-                    {/* <img
-                  className='h-50 rounded-bl-sm rounded-tl-sm'
-                  src={images?.[0]?.url}
-                  alt=''
-                /> */}
-                    {/* <h1 className='font-bold pb-1 pt-4 self-start text-xs'>
-                  {name}
-                </h1> */}
-                    {/* <div className='flex self-start truncate w-[100%]'>
-                  <p className='mr-1 text-[0.7rem] text-gray-400 truncate'>
-                    {genres.join(' - ')}
-                  </p>
-                </div> */}
-                  </div>
-                </UnstyledLink>
-              ))}
+                  </UnstyledLink>
+                );
+              })}
         </div>
 
         <h1 className='font-bold mb-3 mt-6 text-2xl xl:text-3xl'>
@@ -177,7 +157,6 @@ export default function HomePage() {
                     key={id + i}
                     href={`/album/${albumId}`}
                     className=''
-                    onClick={() => setPlaylistId(id)}
                   >
                     <div className='bg-dark bg-opacity-80 cursor-pointer duration-2000 flex flex-col h-60 p-3 rounded transition-all hover:bg-gray-700'>
                       {/* <NextImage

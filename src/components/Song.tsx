@@ -6,7 +6,7 @@ import { millisToMinutesAndSeconds } from '@/lib/helper';
 import CustomLink from '@/components/links/CustomLink';
 
 // import useSpotify from '@/hooks/useSpotify';
-import { currentTrackIdState, isPlayingState } from '@/atoms/songsAtom';
+import { currentTrackIdState, isPlayingTrackState } from '@/atoms/tracksAtom';
 
 export interface ISong {
   id: string;
@@ -35,7 +35,7 @@ function Song({
 }) {
   // const spotifyApi = useSpotify();
   const setCurrenTrackId = useSetRecoilState(currentTrackIdState);
-  const setIsPlaying = useSetRecoilState(isPlayingState);
+  const setIsPlaying = useSetRecoilState(isPlayingTrackState);
 
   const playSong = useCallback(() => {
     setCurrenTrackId(id);

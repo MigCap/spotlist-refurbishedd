@@ -4,8 +4,8 @@ export const currentTrackIdState: any = atom({
   key: 'currentTrackIdState',
   default: null,
 });
-export const isPlayingState = atom({
-  key: 'isPlayingState',
+export const isPlayingTrackState = atom({
+  key: 'isPlayingTrackState',
   default: false,
 });
 export const recentlyPlayedTracksState: any = atom({

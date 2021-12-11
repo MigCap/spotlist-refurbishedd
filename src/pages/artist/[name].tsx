@@ -1,5 +1,11 @@
+// import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+
 import { encodeRFC5987ValueChars } from '@/lib/helper';
 import useRandomColor from '@/hooks/useRandomColor';
+
+// import useSpotify from '@/hooks/useSpotify';
+import { artistState } from '@/atoms/artistsAtom';
 
 function ArtistPage({
   artistName,
@@ -7,7 +13,18 @@ function ArtistPage({
   imgUrl,
   artistInfoWithImg,
 }: any) {
+  // const spotifyApi = useSpotify();
+
+  const artist: any = useRecoilValue(artistState);
+
+  const imgUrlFromArtistState = artist?.images?.find(
+    (img: any) => img?.height === 640
+  )?.url;
+
+  // const [artistAlbums, setartistAlbums] = useState<any>(null);
+
   const imgs = [
+    imgUrlFromArtistState,
     imgUrl,
     artistInfoWithImg?.artists?.[0]?.strArtistThumb,
     artistInfoWithImg?.artists?.[0]?.strArtistClearart,
@@ -17,6 +34,31 @@ function ArtistPage({
   ].filter((img) => img);
 
   const color = useRandomColor();
+
+  // useEffect(() => {
+  //   if (artist?.id) {
+  //     spotifyApi.getArtistAlbums(artist?.id).then(
+  //       (data) => {
+  //         let artistAlbums = data?.body?.items;
+
+  //         const albumsUniqueIds = Array.from(
+  //           new Set(artistAlbums?.map((album: any) => album?.id))
+  //         );
+
+  //         artistAlbums = artistAlbums?.filter((album: any) =>
+  //         albumsUniqueIds?.includes(album?.id)
+  //         );
+
+  //         setartistAlbums(artistAlbums);
+  //       },
+  //       (err) => {
+  //         console.log('Something went wrong!', err);
+  //       }
+  //     );
+  //   }
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <>
@@ -37,7 +79,13 @@ function ArtistPage({
         }
       >
         <div>
-          <h1 className='font-bold text-7xl'>{artistName}</h1>
+          <h1
+            className={`font-bold ${
+              artistName?.length > 8 ? 'text-5xl' : 'text-7xl'
+            }`}
+          >
+            {artistName}
+          </h1>
           <div className='flex pt-3 text-sm'>
             <p>
               {artistInfo?.artist?.tags?.tag
