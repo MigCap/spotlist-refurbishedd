@@ -71,7 +71,7 @@ export default function HomePage() {
       <Seo templateTitle='Spotlists 2.0' />
 
       <div
-        className={`bg-gradient-to-b flex flex-col from-gray-800 p-8 pl-7 pt-16 pb-24 text-white to-black`}
+        className={`bg-gradient-to-b flex flex-col from-gray-800 p-8 pl-7 pt-16 pb-48 text-white to-black`}
       >
         <h1 className='font-bold mb-4 mt-4 text-3xl xl:text-4xl'>
           Good {getDayPart()}

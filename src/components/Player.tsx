@@ -19,8 +19,6 @@ import { useRecoilState } from 'recoil';
 import useSongInfo from '@/hooks/useSongInfo';
 import useSpotify from '@/hooks/useSpotify';
 
-import CustomLink from '@/components/links/CustomLink';
-
 import { currentTrackIdState, isPlayingTrackState } from '@/atoms/tracksAtom';
 
 function Player() {
@@ -78,24 +76,18 @@ function Player() {
   }, [debouncedAdjustVolume, volume]);
 
   return (
-    <div className='absolute bg-gradient-to-b bottom-0 from-black grid grid-cols-3 h-20 px-1 text-white text-xs to-gray-800 w-screen z-50 sm:h-24 sm:px-2 md:px-8 md:text-base'>
+    <div className='absolute bg-gradient-to-b bottom-0 from-black grid grid-cols-3 h-20 px-1 text-white text-xs to-gray-800 w-screen z-50 sm:h-24 sm:px-2 md:px-6 md:text-base'>
       {/* Left */}
-      <div className='flex items-center space-x-4'>
+      <div className='flex items-center space-x-2 sm:space-x-4'>
         <img
           className='h-10 hidden w-10 md:inline'
           src={songInfo?.album?.images?.[0]?.url}
           alt=''
         />
-        <div className='flex flex-col-end-1 items-center'>
-          <div className='text-sm lg:text-base'>
-            <h3>{songInfo?.name}</h3>
-            <CustomLink
-              href={`/artist/${songInfo?.artists?.[0]?.name}?id=${songInfo?.artists?.[0]?.id}`}
-            >
-              <p className='text-gray-500 text-xs'>
-                {songInfo?.artists?.[0]?.name}
-              </p>
-            </CustomLink>
+        <div className='flex items-center overflow-hidden text-xs lg:text-base'>
+          <div className='hidden sm:block'>
+            <h3 className='truncate'>{songInfo?.name}</h3>
+            <p className='text-gray-500'>{songInfo?.artists?.[0]?.name}</p>
           </div>
           <HeartIcon className='ml-4 player-button' />
         </div>
