@@ -1,6 +1,5 @@
 import { encodeRFC5987ValueChars } from '@/lib/helper';
-
-import TopSection from '@/components/layout/TopSection';
+import useRandomColor from '@/hooks/useRandomColor';
 
 function ArtistPage({
   artistName,
@@ -17,43 +16,37 @@ function ArtistPage({
     artistInfoWithImg?.artists?.[0]?.strArtistFanart3,
   ].filter((img) => img);
 
-  function CustomTopSection({ color }: any) {
-    return (
-      <>
-        <section
-          className={`bg-gradient-to-b flex ${color} h-80 md:h-96 items-end p-8 space-x-7 text-white to-black`}
-          style={
-            imgs?.[0] && {
-              // background: `top 50% center / cover fixed  no-repeat url(${
-              //   imgs?.length > 1 ? imgs?.[1] : imgs?.[0]
-              // })`,
-              background: `url(${
-                imgs?.length > 1 ? imgs?.[1] : imgs?.[0]
-              }) no-repeat`,
-              backgroundAttachment: 'fixed',
-              backgroundPosition: 'center center',
-              backgroundSize: 'cover',
-            }
-          }
-        >
-          <div>
-            <h1 className='font-bold text-7xl'>{artistName}</h1>
-            <div className='flex pt-3 text-sm'>
-              <p>
-                {artistInfo?.artist?.tags?.tag
-                  ?.map?.(({ name }: any) => name)
-                  .join(' - ')}
-              </p>
-            </div>
-          </div>
-        </section>
-      </>
-    );
-  }
+  const color = useRandomColor();
 
   return (
     <>
-      <TopSection CustomTopSection={CustomTopSection} />
+      <section
+        className={`bg-gradient-to-b flex ${color} h-80 md:h-96 items-end p-8 space-x-7 text-white to-black`}
+        style={
+          imgs?.[0] && {
+            // background: `top 50% center / cover fixed  no-repeat url(${
+            //   imgs?.length > 1 ? imgs?.[1] : imgs?.[0]
+            // })`,
+            background: `url(${
+              imgs?.length > 1 ? imgs?.[1] : imgs?.[0]
+            }) no-repeat`,
+            backgroundAttachment: 'fixed',
+            backgroundPosition: 'center center',
+            backgroundSize: 'cover',
+          }
+        }
+      >
+        <div>
+          <h1 className='font-bold text-7xl'>{artistName}</h1>
+          <div className='flex pt-3 text-sm'>
+            <p>
+              {artistInfo?.artist?.tags?.tag
+                ?.map?.(({ name }: any) => name)
+                .join(' - ')}
+            </p>
+          </div>
+        </div>
+      </section>
 
       <div
         className={`flex flex-col p-8 pb-28 pl-7 md:pb-44 pt-8 space-y-1 text-white bg-gradient-to-b from-gray-800 to-black`}

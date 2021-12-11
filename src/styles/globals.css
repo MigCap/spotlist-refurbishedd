@@ -33,6 +33,11 @@
     @apply cursor-pointer duration-100 ease-out h-5 transform transition w-5 hover:scale-125;
   }
 }
+@layer components {
+  .songs-container {
+    @apply flex flex-col pb-20 px-2 space-y-1 text-white md:px-3;
+  }
+}
 
 @layer base {
   /* inter var - latin */

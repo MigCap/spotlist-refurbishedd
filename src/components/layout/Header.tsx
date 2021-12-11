@@ -1,4 +1,11 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
+import {
+  // ColorSwatchIcon,
+  HomeIcon,
+  // SearchIcon,
+  UserIcon,
+  // UserCircleIcon,
+} from '@heroicons/react/outline';
 import clsx from 'clsx';
 
 import { useRouter } from 'next/router';
@@ -10,6 +17,7 @@ import { useSession, signOut } from 'next-auth/react';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import { Menu, Transition } from '@headlessui/react';
 import { debounce as _debounce } from 'lodash';
+import UnstyledLink from '@/components/links/UnstyledLink';
 
 function Header() {
   const { data: session } = useSession();
@@ -73,13 +81,24 @@ function Header() {
             leaveTo='transform opacity-0 scale-95'
           >
             <Menu.Items className='absolute bg-gray-900 mt-2 origin-top-right right-0 ring-1 ring-black ring-opacity-5 rounded-md shadow-lg text-sm w-56 focus:outline-none'>
+              <UnstyledLink href={`/`} className=''>
+                <div className='m-1 px-3 py-2 rounded-md hover:bg-gray-800'>
+                  <Menu.Item>
+                    <h1>Home</h1>
+                    {/* <div className='flex items-center'>
+                      <HomeIcon className='h-5 mr-2 w-5' />
+                      <h1>Home</h1>
+                    </div> */}
+                  </Menu.Item>
+                </div>
+              </UnstyledLink>
               <div className='cursor-pointer m-1 px-3 py-2 rounded-md hover:bg-gray-800'>
                 <Menu.Item>
                   <h1>Profile</h1>
-                  {/* <h1>
-                    Good {getDayPart()},{' '}
-                    <span className='pl-3'>{session?.user?.name}</span>
-                  </h1> */}
+                  {/* <div className='flex items-center'>
+                    <UserIcon className='h-5 mr-2 w-5' />
+                    <h1>Profile</h1>
+                  </div> */}
                 </Menu.Item>
               </div>
               <div className='cursor-pointer m-1 px-3 py-2 rounded-md hover:bg-gray-800'>

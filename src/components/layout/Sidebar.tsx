@@ -54,6 +54,7 @@ function Sidebar({ className }: { className?: string }) {
             src='/images/Spotify_Logo_CMYK_White.png'
             alt='spotify-logo'
           />
+          {/* Menu... */}
           <div>
             {routesConfig?.map(({ id, name, path, Icon }, i: number) => {
               if (path && Icon) {

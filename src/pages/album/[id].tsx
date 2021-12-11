@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import useSpotify from '@/hooks/useSpotify';
 
 import TopSection from '@/components/layout/TopSection';
+import Song from '@/components/Song';
 
 function AlbumPage() {
   const {
@@ -24,22 +25,12 @@ function AlbumPage() {
         .catch((err) => console.log('Something went wrong', err));
   }, [spotifyApi, albumId]);
 
-  function CustomTopSection({ color }: any) {
-    return (
-      <>
-        <section
-          className={`bg-gradient-to-b flex ${color} h-80 items-end p-8 space-x-7 text-white to-black`}
-        >
-          {album?.images?.[0]?.url && (
-            <img
-              className='h-44 shadow-2xl w-44'
-              src={album?.images?.[0]?.url}
-              alt=''
-            />
-          )}
-
-          <div>
-            {/* <p>PLAYLIST</p> */}
+  return (
+    <>
+      <TopSection
+        imgUrl={album?.images?.[0]?.url}
+        Content={() => (
+          <>
             <h1 className='font-bold text-2xl md:text-3xl xl:text-5xl'>
               {album?.name}
             </h1>
@@ -49,23 +40,32 @@ function AlbumPage() {
               </h3>
             ))}
             <p className='pt-3 text-sm uppercase'>LABEL: {album?.label}</p>
-          </div>
-        </section>
-      </>
-    );
-  }
-
-  return (
-    <>
-      <TopSection CustomTopSection={CustomTopSection} />
-      <div
-        className={`flex flex-col p-8 pb-28 pl-7 pt-8 space-y-1 text-white bg-gradient-to-b from-gray-800 to-black`}
-      >
-        {album?.tracks?.items?.map(({ id, name, track_number }: any) => (
-          <p key={id}>
-            {track_number}. {name}
-          </p>
-        ))}
+          </>
+        )}
+      />
+      <div className='songs-container'>
+        {album?.tracks?.items?.map((track: any, i: number) => {
+          const currTrack = track;
+          return (
+            <Song
+              key={currTrack?.id + i}
+              song={{
+                id: currTrack?.id,
+                order: currTrack?.track_number,
+                name: currTrack?.name,
+                artists: currTrack?.artists,
+                duration_ms: currTrack?.duration_ms,
+                album: {
+                  id: currTrack?.album?.id,
+                  name: currTrack?.album?.name,
+                  imageUrl: album?.images?.find(
+                    (image: any) => image?.height === 64
+                  )?.url,
+                },
+              }}
+            />
+          );
+        })}
       </div>
     </>
   );
