@@ -30,7 +30,7 @@ function AlbumPage() {
       <TopSection
         imgUrl={album?.images?.[0]?.url}
         Content={() => (
-          <>
+          <div className='py-3 text-center md:py-0 md:text-left'>
             <h1 className='font-bold text-2xl md:text-3xl xl:text-5xl'>
               {album?.name}
             </h1>
@@ -40,7 +40,7 @@ function AlbumPage() {
               </h3>
             ))}
             <p className='pt-3 text-sm uppercase'>LABEL: {album?.label}</p>
-          </>
+          </div>
         )}
       />
       <div className='songs-container'>
