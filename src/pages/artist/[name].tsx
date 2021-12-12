@@ -4,7 +4,7 @@ import { encodeRFC5987ValueChars } from '@/lib/helper';
 import useRandomColor from '@/hooks/useRandomColor';
 import useSpotify from '@/hooks/useSpotify';
 
-import bgImage from '../../../public/images/spotify_img_bground.png';
+import UnstyledLink from '@/components/links/UnstyledLink';
 
 function ArtistPage({
   artistName,
@@ -77,23 +77,8 @@ function ArtistPage({
 
   return (
     <>
-      {/* <section
-        className={`bg-gradient-to-b flex ${color} h-80 md:h-96 items-end p-8 space-x-7 text-white to-black`}
-        style={
-          imgs?.[0] && {
-            // backgroundImage: `url(${topImgUrl}), linear-gradient(rgba(135, 80, 156, 0.9)`,
-            background: `url(${bgImage?.src})`,
-            // background: `url(${
-            //   imgs?.length > 1 ? imgs?.[1] : imgs?.[0]
-            // }) no-repeat`,
-            backgroundAttachment: 'fixed',
-            backgroundPosition: 'center center',
-            backgroundSize: 'cover',
-          }
-        }
-      > */}
       <section
-        className={`${sectionBackground} flex h-80 md:h-96 items-end p-8 space-x-7 text-white overflow-hidden relative`}
+        className={`${sectionBackground} flex h-80 md:h-80 lg-96 items-end p-8 space-x-7 text-white overflow-hidden relative`}
       >
         <img
           className='absolute h-auto left-0 opacity-[0.4] top-0 w-full'
@@ -142,10 +127,14 @@ function ArtistPage({
           {artistAlbums?.slice(0, 9)?.map(({ id, images, name }: any) => {
             const imgUrl = images?.find((img: any) => img?.height === 300)?.url;
             return (
-              <div key={id} className='flex flex-col items-center'>
-                <img className='shadow-2xl' src={imgUrl} alt='' />
-                <p className='px-0 py-3 text-center'>{name}</p>
-              </div>
+              <UnstyledLink key={id} href={`/album/${id}`} className=''>
+                <div className='flex flex-col group items-center justify-center'>
+                  <img className='shadow-2xl' src={imgUrl} alt='' />
+                  <p className='px-0 py-3 text-center text-sm lg:text-base group-hover:underline'>
+                    {name}
+                  </p>
+                </div>
+              </UnstyledLink>
             );
           })}
         </div>

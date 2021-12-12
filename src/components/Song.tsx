@@ -52,14 +52,16 @@ function Song({
         // style={{
         //   gridTemplateColumns: '45% 45% 10%',
         // }}
-        className='auto-cols-max cursor-pointer grid grid-cols-[80%,20%] items-center px-5 py-4 rounded-lg text-gray-500 text-xs md:grid-cols-3 lg:text-base hover:bg-gray-900'
+        className='auto-cols-max cursor-pointer grid grid-cols-[80%,20%] items-center px-5 py-4 rounded-lg text-gray-500 text-xs md:grid-cols-[50%,40%,10%] lg:text-base hover:bg-gray-900'
       >
+        {/* Left */}
         <div className='flex items-center space-x-2 md:space-x-4'>
           <p>{order + 1}</p>
           <img className='h-10 w-10' src={albumImageUrl} alt={albumName} />
           <div className='flex flex-col truncate'>
+            {/* Track Name */}
             <p className='text-left text-white truncate'>{name}</p>
-            {/* Artists */}
+            {/* Track Artists */}
             <div className='flex'>
               {artists?.slice(0, 2)?.map((artist: any) => {
                 return (
@@ -75,13 +77,14 @@ function Song({
             </div>
           </div>
         </div>
-
-        <div className='hidden mr-auto text-left truncate md:block md:pl-6'>
+        {/* Center */}
+        <div className='hidden mr-auto text-left truncate w-full md:flex md:pl-6'>
+          {/* Album name */}
           <CustomLink href={`/album/${albumId}`}>
-            <p className=''>{albumName}</p>
+            <p className='text-white'>{albumName}</p>
           </CustomLink>
         </div>
-
+        {/* Right */}
         <p className='ml-auto'>{millisToMinutesAndSeconds(duration_ms)}</p>
       </div>
     </button>
