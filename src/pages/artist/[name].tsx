@@ -48,17 +48,21 @@ function ArtistPage({
       );
       spotifyApi.getArtistAlbums(spotifyArtistId).then(
         (data) => {
-          let artistAlbums = data?.body?.items;
+          const artistAlbums = data?.body?.items;
 
-          const albumsUniqueIds = Array.from(
-            new Set(artistAlbums?.map((album: any) => album?.id))
-          );
+          const uniqueAlbums = artistAlbums?.reduce((acc: any, album: any) => {
+            const isAlbumAlreadyAdded = acc.some(
+              (accAlbum: any) => accAlbum.name === album.name
+            );
 
-          artistAlbums = artistAlbums?.filter((album: any) =>
-            albumsUniqueIds?.includes(album?.id)
-          );
+            if (!isAlbumAlreadyAdded) {
+              acc = [...acc, album];
+            }
 
-          setArtistAlbums(artistAlbums);
+            return acc;
+          }, []);
+
+          setArtistAlbums(uniqueAlbums);
         },
         (err) => {
           console.log('Something went wrong!', err);

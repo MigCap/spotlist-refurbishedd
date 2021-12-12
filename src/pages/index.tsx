@@ -114,13 +114,13 @@ export default function HomePage() {
                     href={`/artist/${name}?id=${id}`}
                     className='overflow-hidden w-auto'
                   >
-                    <div className='bg-dark cursor-pointer flex flex-col h-52 items-center overflow-hidden relative rounded w-auto md:h-56'>
+                    <div className='bg-dark cursor-pointer flex flex-col group h-52 items-center overflow-hidden relative rounded w-auto md:h-44'>
                       <img
-                        className='absolute h-full object-cover opacity-40 p-3 rounded transition-all w-full hover:opacity-100'
+                        className='absolute h-full object-cover opacity-40 p-3 rounded transition-opacity w-full group-hover:opacity-100'
                         src={images?.[0]?.url}
                         alt=''
                       />
-                      <div className='flex flex-col h-full items-center justify-center p-3 relative'>
+                      <div className='flex flex-col h-full items-center justify-center p-3 relative transition-all group-hover:hidden'>
                         <h1 className='font-bold text-2xl text-center'>
                           {name}
                         </h1>
@@ -154,7 +154,7 @@ export default function HomePage() {
                     href={`/album/${albumId}`}
                     className=''
                   >
-                    <div className='bg-dark bg-opacity-80 cursor-pointer duration-2000 flex flex-col h-60 p-3 rounded transition-all hover:bg-gray-700'>
+                    <div className='bg-dark bg-opacity-80 cursor-pointer duration-2000 flex flex-col group h-60 p-3 rounded transition-all hover:bg-gray-700'>
                       {/* <NextImage
                         alt={trackName}
                         width={200}
@@ -182,7 +182,7 @@ export default function HomePage() {
                       <h1 className='font-bold pb-1 pt-4 self-start text-xs'>
                         {trackName}
                       </h1>
-                      <p className='self-start text-[0.7rem] text-gray-400 truncate w-[100%]'>
+                      <p className='self-start text-[0.7rem] text-gray-400 truncate w-[100%] group-hover:underline'>
                         {albumName}
                       </p>
                     </div>

@@ -14,12 +14,16 @@ import {
 import { debounce } from 'lodash';
 // import { useSession } from 'next-auth/react';
 import { useCallback, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import useSongInfo from '@/hooks/useSongInfo';
 import useSpotify from '@/hooks/useSpotify';
 
-import { currentTrackIdState, isPlayingTrackState } from '@/atoms/tracksAtom';
+import {
+  currentTrackIdState,
+  isPlayingTrackState,
+  recentlyPlayedTracksState,
+} from '@/atoms/tracksAtom';
 
 function Player() {
   // const { data: session, status } = useSession();
@@ -27,10 +31,16 @@ function Player() {
 
   const [currenTrackId, setCurrenTrackId] = useRecoilState(currentTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingTrackState);
-
+  const recentlyPlayedTracks = useRecoilValue<any>(recentlyPlayedTracksState);
   const [volume, setVolume] = useState(50);
 
   const songInfo = useSongInfo();
+
+  useEffect(() => {
+    if (recentlyPlayedTracks && !songInfo?.id) {
+      setCurrenTrackId(recentlyPlayedTracks?.[0]?.track?.id);
+    }
+  }, [recentlyPlayedTracks, setCurrenTrackId, songInfo]);
 
   const fetchCurrentSong = useCallback(() => {
     if (!songInfo) {
@@ -42,7 +52,7 @@ function Player() {
       //   setIsPlaying(data?.body?.is_playing);
       // });
     }
-  }, [setIsPlaying, songInfo, spotifyApi]);
+  }, [songInfo]);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken() && !currenTrackId) {
@@ -61,7 +71,7 @@ function Player() {
     //     setIsPlaying(true);
     //   }
     // });
-  }, [setIsPlaying, spotifyApi]);
+  }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedAdjustVolume = useCallback(
