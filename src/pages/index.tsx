@@ -112,20 +112,18 @@ export default function HomePage() {
                   <UnstyledLink
                     key={id + i}
                     href={`/artist/${name}?id=${id}`}
-                    className='overflow-hidden'
+                    className='overflow-hidden w-auto'
                   >
-                    <div className='bg-dark bg-opacity-80 cursor-pointer duration-2000 flex flex-col h-60 p-3 rounded transition-all sm:items-center hover:bg-gray-700'>
-                      <div
-                        className='flex h-[100%] items-center justify-center rounded w-[100%]'
-                        style={{
-                          backgroundImage: `url(${images?.[0]?.url})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                          backgroundBlendMode: 'saturation',
-                        }}
-                      >
-                        <h1 className='font-bold text-2xl'>{name}</h1>
+                    <div className='bg-dark cursor-pointer flex flex-col h-52 items-center overflow-hidden relative rounded w-auto md:h-56'>
+                      <img
+                        className='absolute h-full object-cover opacity-40 p-3 rounded transition-all w-full hover:opacity-100'
+                        src={images?.[0]?.url}
+                        alt=''
+                      />
+                      <div className='flex flex-col h-full items-center justify-center p-3 relative'>
+                        <h1 className='font-bold text-2xl text-center'>
+                          {name}
+                        </h1>
                       </div>
                     </div>
                   </UnstyledLink>

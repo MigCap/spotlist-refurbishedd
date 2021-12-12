@@ -74,20 +74,20 @@
   }
   /* #endregion  /**======== Typography =========== */
 
-  .layout {
+  /* .layout { */
     /* 1100px */
-    max-width: 68.75rem;
+    /* max-width: 68.75rem;
     @apply mx-auto w-11/12;
-  }
+  } */
 
   .bg-dark a.custom-link {
     @apply border-gray-200 hover:border-gray-200/0;
   }
 
   /* Class to adjust with sticky footer */
-  .min-h-main {
+  /* .min-h-main {
     @apply min-h-[calc(100vh-56px)];
-  }
+  } */
 }
 
 @layer utilities {

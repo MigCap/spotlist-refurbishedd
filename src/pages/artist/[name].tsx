@@ -4,6 +4,8 @@ import { encodeRFC5987ValueChars } from '@/lib/helper';
 import useRandomColor from '@/hooks/useRandomColor';
 import useSpotify from '@/hooks/useSpotify';
 
+import bgImage from '../../../public/images/spotify_img_bground.png';
+
 function ArtistPage({
   artistName,
   artistInfo,
@@ -67,25 +69,38 @@ function ArtistPage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const topImgUrl = imgs?.length > 1 ? imgs?.[1] : imgs?.[0];
+
+  const sectionBackground = topImgUrl
+    ? `bg-black`
+    : `bg-gradient-to-b ${color} to-black`;
+
   return (
     <>
-      <section
+      {/* <section
         className={`bg-gradient-to-b flex ${color} h-80 md:h-96 items-end p-8 space-x-7 text-white to-black`}
         style={
           imgs?.[0] && {
-            // background: `top 50% center / cover fixed  no-repeat url(${
+            // backgroundImage: `url(${topImgUrl}), linear-gradient(rgba(135, 80, 156, 0.9)`,
+            background: `url(${bgImage?.src})`,
+            // background: `url(${
             //   imgs?.length > 1 ? imgs?.[1] : imgs?.[0]
-            // })`,
-            background: `url(${
-              imgs?.length > 1 ? imgs?.[1] : imgs?.[0]
-            }) no-repeat`,
+            // }) no-repeat`,
             backgroundAttachment: 'fixed',
             backgroundPosition: 'center center',
             backgroundSize: 'cover',
           }
         }
+      > */}
+      <section
+        className={`${sectionBackground} flex h-80 md:h-96 items-end p-8 space-x-7 text-white overflow-hidden relative`}
       >
-        <div>
+        <img
+          className='absolute h-auto left-0 opacity-[0.4] top-0 w-full'
+          src={topImgUrl}
+          alt=''
+        />
+        <div className='relative'>
           <h1
             className={`font-bold ${
               artistName?.length > 8 ? 'text-5xl' : 'text-7xl'
