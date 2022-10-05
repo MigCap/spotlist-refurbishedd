@@ -1,88 +1,33 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
+
+// import { Router } from 'next/router';
 
 import { encodeRFC5987ValueChars } from '@/lib/helper';
-import useRandomColor from '@/hooks/useRandomColor';
-import useSpotify from '@/hooks/useSpotify';
 
 import UnstyledLink from '@/components/links/UnstyledLink';
+
+import { useArtist } from './useArtist';
 
 function ArtistPage({
   artistName,
   artistInfo,
   imgUrl,
-  artistInfoWithImg,
+  // artistInfoWithImg,
   spotifyArtistId,
 }: any) {
-  const spotifyApi = useSpotify();
-
-  const [artist, setArtistDetail] = useState<any>(null);
-  const [artistAlbums, setArtistAlbums] = useState<any>(null);
-
-  const imgUrlFromArtistState =
-    artist?.name === artistName &&
-    artist?.images?.find((img: any) => img?.height === 640)?.url;
-
-  const imgs = [
-    imgUrlFromArtistState,
-    imgUrl,
-    artistInfoWithImg?.artists?.[0]?.strArtistThumb,
-    artistInfoWithImg?.artists?.[0]?.strArtistClearart,
-    artistInfoWithImg?.artists?.[0]?.strArtistFanart,
-    artistInfoWithImg?.artists?.[0]?.strArtistFanart2,
-    artistInfoWithImg?.artists?.[0]?.strArtistFanart3,
-  ].filter((img) => img);
-
-  const color = useRandomColor();
-
-  useEffect(() => {
-    if (spotifyArtistId) {
-      spotifyApi.getArtist(spotifyArtistId).then(
-        (data) => {
-          const artist = data?.body;
-
-          setArtistDetail(artist);
-        },
-        (err) => {
-          console.log('Something went wrong!', err);
-        }
-      );
-      spotifyApi.getArtistAlbums(spotifyArtistId).then(
-        (data) => {
-          const artistAlbums = data?.body?.items;
-
-          const uniqueAlbums = artistAlbums?.reduce((acc: any, album: any) => {
-            const isAlbumAlreadyAdded = acc.some(
-              (accAlbum: any) => accAlbum.name === album.name
-            );
-
-            if (!isAlbumAlreadyAdded) {
-              acc = [...acc, album];
-            }
-
-            return acc;
-          }, []);
-
-          setArtistAlbums(uniqueAlbums);
-        },
-        (err) => {
-          console.log('Something went wrong!', err);
-        }
-      );
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const topImgUrl = imgs?.length > 1 ? imgs?.[1] : imgs?.[0];
-
-  const sectionBackground = topImgUrl
-    ? `bg-black`
-    : `bg-gradient-to-b ${color} to-black`;
+  const { contentRef, sectionBackground, artistAlbums, imgs, topImgUrl } =
+    useArtist({
+      artistName,
+      imgUrl,
+      spotifyArtistId,
+    });
 
   return (
-    <>
+    <div ref={contentRef}>
       <section
-        className={`${sectionBackground} flex h-80 md:h-80 lg-96 items-end p-8 space-x-7 text-white overflow-hidden relative`}
+        className={`${sectionBackground} flex h-80 md:h-80 lg-96 items-end p-8 text-white overflow-hidden relative`}
       >
         <img
           className='absolute h-auto left-0 opacity-[0.4] top-0 w-full'
@@ -127,6 +72,8 @@ function ArtistPage({
           </p>
         </div>
 
+        <h1 className='font-bold pt-3 text-2xl xl:text-3xl'>Popular albums</h1>
+
         <div className='gap-4 grid grid-cols-2 pt-8 md:gap-6 md:grid-cols-3'>
           {artistAlbums?.slice(0, 9)?.map(({ id, images, name }: any) => {
             const imgUrl = images?.find((img: any) => img?.height === 300)?.url;
@@ -143,7 +90,7 @@ function ArtistPage({
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -154,7 +101,7 @@ export async function getServerSideProps(context: any) {
     query: { name: artistName, id: spotifyArtistId },
   } = context;
 
-  const encodedArtistsName = encodeRFC5987ValueChars(artistName);
+  const encodedArtistsName: any = encodeRFC5987ValueChars(artistName);
 
   const artistInfo = await fetch(
     `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedArtistsName}&api_key=${process.env.LAST_FM_KEY}&format=json`
@@ -196,15 +143,15 @@ export async function getServerSideProps(context: any) {
         }))) ??
     null;
 
-  const artistInfoWithImg = await fetch(
-    `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${encodedArtistsName}`
-  ).then((res) => res?.json() ?? null);
+  // const artistInfoWithImg = await fetch(
+  //   `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${encodedArtistsName}`
+  // ).then((res) => res?.json() ?? null);
 
   return {
     props: {
       artistName,
       artistInfo,
-      artistInfoWithImg,
+      // artistInfoWithImg,
       imgUrl,
       spotifyArtistId,
     },
