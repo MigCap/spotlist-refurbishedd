@@ -8,7 +8,7 @@ import { encodeRFC5987ValueChars } from '@/lib/helper';
 
 import UnstyledLink from '@/components/links/UnstyledLink';
 
-import { useArtist } from './useArtist';
+import { useArtist } from '../../hooks/useArtist';
 
 function ArtistPage({
   artistName,
